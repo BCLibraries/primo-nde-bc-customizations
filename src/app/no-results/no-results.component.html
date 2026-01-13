@@ -1,0 +1,14 @@
+<p>Please try the following options:</p>
+
+<ul>
+  <li>
+    Search in Google Scholar:
+    <a [href]="getGoogleScholarUrl()" target="_blank" rel="noopener noreferrer">
+      {{ searchTerm }}
+    </a>
+  </li>
+  <li>Review your spelling or use fewer keywords.</li>
+  <li *ngIf="searchTerm && searchTerm.length < 5">
+    Try a more specific search term.
+  </li>
+</ul>
