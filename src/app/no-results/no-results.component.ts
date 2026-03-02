@@ -65,12 +65,32 @@ export class NoResultsComponent implements OnInit {
     return !!t && t.length < 5;
   }
 
+  get isBooks(): boolean {
+    const t = this.searchScope();
+    return !!t && t === 'MyInstitution';
+  }
+
+  get isCDI(): boolean {
+    const t = this.searchScope();
+    return !!t && t === 'CentralIndex';
+  }
+
   /**
    * Replaces the AngularJS controller method for generating a link.
-   * @returns A safe, encoded URL for Google Scholar.
+   * @returns A safe, encoded URL.
    */
-  getGoogleScholarUrl(): string {
+  getArticlesUrl(): string {
     const encodedTerm = encodeURIComponent(this.searchTerm() || '');
-    return `https://scholar.google.com/scholar?q=${encodedTerm}`;
+    return `/nde/search?query=${encodedTerm}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=01BC_INST:scot_nde&lang=en`;
+  }
+
+  getBooksUrl(): string {
+    const encodedTerm = encodeURIComponent(this.searchTerm() || '');
+    return `/nde/search?query=${encodedTerm}&tab=LibraryCatalog&search_scope=MyInstitution&searchInFulltext=false&vid=01BC_INST:scot_nde&lang=en`;
+  }
+
+  getWorldCatUrl(): string {
+    const encodedTerm = encodeURIComponent(this.searchTerm() || '');
+    return `https://bc.on.worldcat.org/search?databaseList=&queryString=${encodedTerm}`;
   }
 }

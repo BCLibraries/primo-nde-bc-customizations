@@ -1,12 +1,71 @@
-<p>Please try the following options:</p>
+<div class="we-suggest-container">
+  <div
+    _ngcontent-ng-c3877261839=""
+    class="no-results-container flex ng-star-inserted"
+  >
+    <div
+      _ngcontent-ng-c3877261839=""
+      class="did-you-mean-container flex-layout-center"
+    >
+      <div _ngcontent-ng-c3877261839="" role="alert" class="no-record-found">
+        No records found
+      </div>
+      <div _ngcontent-ng-c3877261839="" class="no-results">
+        <span
+          >There are no results matching your search "{{
+            searchTermValue
+          }}".</span
+        >
+        <!---->
+      </div>
+    </div>
+    <div _ngcontent-ng-c3877261839="" class="we-suggest-container">
+      <p>Please try the following options:</p>
 
-<ul>
-  <li>
-    Search in Google Scholar:
-    <a [href]="getGoogleScholarUrl()" target="_blank" rel="noopener noreferrer">
-      {{ searchTermValue }}
-    </a>
-  </li>
-  <li>Review your spelling or use fewer keywords.</li>
-  <li *ngIf="isShortSearchTerm">Try a more specific search term.</li>
-</ul>
+      <ul _ngcontent-ng-c3877261839="" class="list-of-suggestions">
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isShortSearchTerm"
+        >
+          Try a more specific search term.
+        </li>
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
+          Try different keywords.
+        </li>
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isBooks"
+        >
+          Looking for Articles?
+          <a [href]="getArticlesUrl()" target="_self">
+            Try your search in Articles</a
+          >.
+        </li>
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted" *ngIf="isCDI">
+          Looking for Books?
+          <a [href]="getBooksUrl()" target="_self">
+            Try your search in BC Libraries' Collections</a
+          >.
+        </li>
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
+          Didn't find what you were looking for?
+          <a
+            [href]="getWorldCatUrl()"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Try your search in WorldCat</a
+          >.
+        </li>
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
+          Need something that BC Libraries doesn't own?
+          <a href="https://illiad.bc.edu/illiad/bxm/logon.html"
+            >Submit an interlibrary loan request</a
+          >.
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
