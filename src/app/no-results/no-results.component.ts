@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, inject, Signal } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
+import { MatIconModule } from '@angular/material/icon';
 
 // Minimal shape for the Search feature state used in this component
 interface SearchState {
@@ -17,6 +17,7 @@ interface SearchState {
   imports: [
     /* CommonModule, other necessary modules */
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './no-results.component.html',
   styleUrl: './no-results.component.scss',
