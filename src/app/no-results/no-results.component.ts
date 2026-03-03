@@ -108,6 +108,10 @@ export class NoResultsComponent {
     return `/nde/search?query=${this.encodedSearchTerm()}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en`;
   }
 
+  getExpandURL(): string {
+    return `/nde/search?query=${this.encodedSearchTerm()}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en&pcAvailability=true`;
+  }
+
   getBooksUrl(): string {
     return `/nde/search?query=${this.encodedSearchTerm()}&tab=LibraryCatalog&search_scope=MyInstitution&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en`;
   }

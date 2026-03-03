@@ -54,9 +54,29 @@
           class="ng-star-inserted"
           *ngIf="isBooks()"
         >
+          Didn't find what you were looking for?
+          <a [href]="getWorldCatUrl()" target="_blank" rel="noopener noreferrer"
+            >Try your search in WorldCat</a
+          >.
+        </li>
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isBooks()"
+        >
           Looking for Articles?
-          <a [href]="getArticlesUrl()" target="_self">
-            Try your search in Articles</a
+          <a [href]="getArticlesUrl()" target="_self"
+            >Try your search in Articles</a
+          >.
+        </li>
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isCDI()"
+        >
+          Expand your
+          <a [href]="getExpandURL()" target="_self"
+            >search beyond library collections</a
           >.
         </li>
         <li
@@ -65,18 +85,7 @@
           *ngIf="isCDI()"
         >
           Looking for Books?
-          <a [href]="getBooksUrl()" target="_self"> Try your search in Books</a
-          >.
-        </li>
-        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-          Didn't find what you were looking for?
-          <a
-            [href]="getWorldCatUrl()"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Try your search in WorldCat</a
-          >.
+          <a [href]="getBooksUrl()" target="_self">Try your search in Books</a>.
         </li>
         <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
           Need something that BC Libraries doesn't own?
