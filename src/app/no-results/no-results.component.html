@@ -32,12 +32,7 @@
         No records found
       </div>
       <div _ngcontent-ng-c3877261839="" class="no-results">
-        <span
-          >There are no results matching your search "{{
-            searchTermValue
-          }}".</span
-        >
-        <!---->
+        <span>{{ customMessage() }}</span>
       </div>
     </div>
     <div _ngcontent-ng-c3877261839="" class="we-suggest-container">
@@ -64,7 +59,11 @@
             Try your search in Articles</a
           >.
         </li>
-        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted" *ngIf="isCDI()">
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isCDI()"
+        >
           Looking for Books?
           <a [href]="getBooksUrl()" target="_self"> Try your search in Books</a
           >.
