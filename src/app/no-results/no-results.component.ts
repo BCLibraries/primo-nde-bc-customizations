@@ -1,97 +1,118 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, inject, Signal } from '@angular/core';
+import { Component, inject, Signal, computed } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 
-// Minimal shape for the Search feature state used in this component
-interface SearchState {
-  searchParams: {
-    q?: string;
-    scope?: string;
+/**
+ * Interface representing the structure of your router state as seen in state.json.
+ * This allows the selectors to safely navigate the nested properties.
+ */
+interface CustomRouterState {
+  state: {
+    root: {
+      queryParams: {
+        query?: string;
+        search_scope?: string;
+        tab?: string;
+        vid?: string;
+        [key: string]: any;
+      };
+    };
   };
 }
 
 @Component({
   selector: 'custom-no-results',
   standalone: true,
-  imports: [
-    /* CommonModule, other necessary modules */
-    CommonModule,
-    MatIconModule,
-  ],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './no-results.component.html',
   styleUrl: './no-results.component.scss',
 })
-export class NoResultsComponent implements OnInit {
+export class NoResultsComponent {
   private store = inject(Store);
-  selectSearchState = createFeatureSelector<SearchState>('Search');
+
+  /**
+   * Selectors targeting the specific path found in your state.json:
+   * router > state > root > queryParams
+   */
+  selectRouterState = createFeatureSelector<CustomRouterState>('router');
+
   selectSearchTerm = createSelector(
-    this.selectSearchState,
-    (state) => state.searchParams.q,
-  );
-  selectSearchScope = createSelector(
-    this.selectSearchState,
-    (state) => state.searchParams.scope,
+    this.selectRouterState,
+    (router) => router?.state?.root?.queryParams?.query,
   );
 
-  // State variables
-  customMessage: string = '';
+  selectSearchScope = createSelector(
+    this.selectRouterState,
+    (router) => router?.state?.root?.queryParams?.search_scope,
+  );
+
+  selectSearchTab = createSelector(
+    this.selectRouterState,
+    (router) => router?.state?.root?.queryParams?.tab,
+  );
+
+  selectSearchView = createSelector(
+    this.selectRouterState,
+    (router) => router?.state?.root?.queryParams?.vid,
+  );
+
+  // Signals linked to the selectors
   searchTerm: Signal<string | undefined> = this.store.selectSignal(
     this.selectSearchTerm,
-  ) as Signal<string | undefined>;
+  );
+
   searchScope: Signal<string | undefined> = this.store.selectSignal(
     this.selectSearchScope,
-  ) as Signal<string | undefined>;
+  );
 
-  constructor() {
-    // Services would be injected here, if needed (e.g., private dataService: PrimoDataService)
-  }
+  searchTab: Signal<string | undefined> = this.store.selectSignal(
+    this.selectSearchTab,
+  );
 
-  ngOnInit(): void {
-    const term = this.searchTerm();
-    if (term) {
-      this.customMessage = `Sorry, your search for "${term}" returned no results.`;
-    } else {
-      this.customMessage = `Sorry, no results were found.`;
-    }
-  }
+  searchView: Signal<string | undefined> = this.store.selectSignal(
+    this.selectSearchView,
+  );
 
-  // Expose signal values via getters for template type-check compatibility
+  // derived/computed values
+  private readonly encodedSearchTerm = computed(() =>
+    encodeURIComponent(this.searchTerm() || ''),
+  );
+
+  private readonly encodedSearchView = computed(() =>
+    encodeURIComponent(this.searchView() || ''),
+  );
+
+  isBooks = computed(() => this.searchScope() === 'MyInstitution');
+  isCDI = computed(() => this.searchScope() === 'CentralIndex');
+  isShortSearchTerm = computed(() => {
+    const t = this.searchTerm();
+    return !!t && t.length < 5;
+  });
+
+  customMessage = computed(() => {
+    const t = this.searchTerm();
+    return t
+      ? `Sorry, your search for "${t}" returned no results.`
+      : `Sorry, no results were found.`;
+  });
+
+  // no constructor or lifecycle methods needed; messages & flags come from computed signals
+
+  // keep searchTermValue getter for the template; everything else uses computed signals
   get searchTermValue(): string | undefined {
     return this.searchTerm();
   }
 
-  get isShortSearchTerm(): boolean {
-    const t = this.searchTermValue;
-    return !!t && t.length < 5;
-  }
-
-  get isBooks(): boolean {
-    const t = this.searchScope();
-    return !!t && t === 'MyInstitution';
-  }
-
-  get isCDI(): boolean {
-    const t = this.searchScope();
-    return !!t && t === 'CentralIndex';
-  }
-
-  /**
-   * Replaces the AngularJS controller method for generating a link.
-   * @returns A safe, encoded URL.
-   */
   getArticlesUrl(): string {
-    const encodedTerm = encodeURIComponent(this.searchTerm() || '');
-    return `/nde/search?query=${encodedTerm}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=01BC_INST:scot_nde&lang=en`;
+    return `/nde/search?query=${this.encodedSearchTerm()}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en`;
   }
 
   getBooksUrl(): string {
-    const encodedTerm = encodeURIComponent(this.searchTerm() || '');
-    return `/nde/search?query=${encodedTerm}&tab=LibraryCatalog&search_scope=MyInstitution&searchInFulltext=false&vid=01BC_INST:scot_nde&lang=en`;
+    return `/nde/search?query=${this.encodedSearchTerm()}&tab=LibraryCatalog&search_scope=MyInstitution&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en`;
   }
 
   getWorldCatUrl(): string {
-    const encodedTerm = encodeURIComponent(this.searchTerm() || '');
-    return `https://bc.on.worldcat.org/search?databaseList=&queryString=${encodedTerm}`;
+    return `https://bc.on.worldcat.org/search?databaseList=&queryString=${this.encodedSearchTerm()}`;
   }
 }
