@@ -54,16 +54,6 @@
           class="ng-star-inserted"
           *ngIf="isBooks()"
         >
-          Didn't find what you were looking for?
-          <a [href]="getWorldCatUrl()" target="_blank" rel="noopener noreferrer"
-            >Try your search in WorldCat</a
-          >.
-        </li>
-        <li
-          _ngcontent-ng-c3877261839=""
-          class="ng-star-inserted"
-          *ngIf="isBooks()"
-        >
           Looking for Articles?
           <a [href]="getArticlesUrl()" target="_self"
             >Try your search in Articles</a
@@ -72,11 +62,21 @@
         <li
           _ngcontent-ng-c3877261839=""
           class="ng-star-inserted"
-          *ngIf="isCDI()"
+          *ngIf="isNotExpanded() && (isCDI() || isEverything())"
         >
           Expand your
           <a [href]="getExpandURL()" target="_self"
             >search beyond library collections</a
+          >.
+        </li>
+        <li
+          _ngcontent-ng-c3877261839=""
+          class="ng-star-inserted"
+          *ngIf="isBooks() || isEverything()"
+        >
+          Didn't find what you were looking for?
+          <a [href]="getWorldCatUrl()" target="_blank" rel="noopener noreferrer"
+            >Try your search in WorldCat</a
           >.
         </li>
         <li

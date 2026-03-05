@@ -15,6 +15,7 @@ interface CustomRouterState {
         search_scope?: string;
         tab?: string;
         vid?: string;
+        pcAvailability?: string;
         [key: string]: any;
       };
     };
@@ -57,6 +58,11 @@ export class NoResultsComponent {
     (router) => router?.state?.root?.queryParams?.vid,
   );
 
+  selectSearchExpanded = createSelector(
+    this.selectRouterState,
+    (router) => router?.state?.root?.queryParams?.pcAvailability,
+  );
+
   // Signals linked to the selectors
   searchTerm: Signal<string | undefined> = this.store.selectSignal(
     this.selectSearchTerm,
@@ -74,6 +80,10 @@ export class NoResultsComponent {
     this.selectSearchView,
   );
 
+  searchExpanded: Signal<string | undefined> = this.store.selectSignal(
+    this.selectSearchExpanded,
+  );
+
   // derived/computed values
   private readonly encodedSearchTerm = computed(() =>
     encodeURIComponent(this.searchTerm() || ''),
@@ -85,6 +95,8 @@ export class NoResultsComponent {
 
   isBooks = computed(() => this.searchScope() === 'MyInstitution');
   isCDI = computed(() => this.searchScope() === 'CentralIndex');
+  isEverything = computed(() => this.searchScope() === 'MyInst_and_CI');
+  isNotExpanded = computed(() => this.searchExpanded() !== 'true');
   isShortSearchTerm = computed(() => {
     const t = this.searchTerm();
     return !!t && t.length < 5;
