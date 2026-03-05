@@ -85,12 +85,20 @@ export class NoResultsComponent {
   );
 
   // derived/computed values
-  private readonly encodedSearchTerm = computed(() =>
+  private readonly encodedSearchTerm = computed((): string =>
     encodeURIComponent(this.searchTerm() || ''),
   );
 
-  private readonly encodedSearchView = computed(() =>
+  private readonly encodedSearchView = computed((): string =>
     encodeURIComponent(this.searchView() || ''),
+  );
+
+  private readonly encodedSearchScope = computed((): string =>
+    encodeURIComponent(this.searchScope() || ''),
+  );
+
+  private readonly encodedSearchTab = computed((): string =>
+    encodeURIComponent(this.searchTab() || ''),
   );
 
   isBooks = computed(() => this.searchScope() === 'MyInstitution');
@@ -121,7 +129,7 @@ export class NoResultsComponent {
   }
 
   getExpandURL(): string {
-    return `/nde/search?query=${this.encodedSearchTerm()}&tab=CentralIndex&search_scope=CentralIndex&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en&pcAvailability=true`;
+    return `/nde/search?query=${this.encodedSearchTerm()}&tab=${this.encodedSearchTab()}&search_scope=${this.encodedSearchScope()}&searchInFulltext=false&vid=${this.encodedSearchView()}&lang=en&pcAvailability=true`;
   }
 
   getBooksUrl(): string {
