@@ -40,32 +40,36 @@
 
       <ul _ngcontent-ng-c3877261839="" class="list-of-suggestions">
         @if (isShortSearchTerm()) {
-          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-            Try a longer search term.
+          <!-- display: inline -->
+          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+            >Try a longer search term.
           </li>
         }
-        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-          Try different keywords.
+        <!-- display: inline -->
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+          >Try different keywords.
         </li>
         @if (isBooks()) {
-          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-            Looking for Articles?
+          <!-- display: inline -->
+          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+            >Looking for Articles?
             <a [href]="getArticlesUrl()" target="_self"
               >Try your search in Articles</a
             >.
           </li>
         }
         @if (isNotExpanded() && (isCDI() || isEverything())) {
+          <!-- display: inline -->
           <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-            Expand your
             <a [href]="getExpandURL()" target="_self"
-              >search beyond library collections</a
+              >Expand your search beyond library collections</a
             >.
           </li>
         }
         @if (isBooks() || isEverything()) {
-          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-            Didn't find what you were looking for?
+          <!-- display: inline -->
+          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+            >Didn't find what you were looking for?
             <a
               [href]="getWorldCatUrl()"
               target="_blank"
@@ -75,14 +79,16 @@
           </li>
         }
         @if (isCDI()) {
-          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-            Looking for Books?
+          <!-- display: inline -->
+          <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+            >Looking for Books?
             <a [href]="getBooksUrl()" target="_self">Try your search in Books</a
             >.
           </li>
         }
-        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted">
-          Need something that BC Libraries doesn't own?
+        <!-- display: inline -->
+        <li _ngcontent-ng-c3877261839="" class="ng-star-inserted"
+          >Need something that BC Libraries doesn't own?
           <a href="https://illiad.bc.edu/illiad/bxm/logon.html"
             >Submit an interlibrary loan request</a
           >.
