@@ -1,3 +1,20 @@
 :root {
   --sys-primary: #8a1009;
 }
+
+/* Brief Display styles */
+
+/* remove padding for empty label */
+span.margin-right-small:empty {
+	margin-inline-end: unset;
+}
+
+/* align label line-height with content */
+p.record-main-details-font-size span.light-text.margin-right-small {
+	line-height: 1.25rem;
+}
+
+/* add space after delimiter */
+span.flex-row.ng-star-inserted {
+    margin-inline-end: .25rem;
+}
