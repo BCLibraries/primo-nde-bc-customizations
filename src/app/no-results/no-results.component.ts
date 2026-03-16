@@ -22,6 +22,37 @@ interface CustomRouterState {
   };
 }
 
+/**
+ * Selectors targeting the specific path found in your state.json:
+ * router > state > root > queryParams
+ */
+const selectRouterState = createFeatureSelector<CustomRouterState>('router');
+
+const selectSearchTerm = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.query,
+);
+
+const selectSearchScope = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.search_scope,
+);
+
+const selectSearchTab = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.tab,
+);
+
+const selectSearchView = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.vid,
+);
+
+const selectSearchExpanded = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.pcAvailability,
+);
+
 @Component({
   selector: 'custom-no-results',
   standalone: true,
@@ -32,57 +63,21 @@ interface CustomRouterState {
 export class NoResultsComponent {
   private store = inject(Store);
 
-  /**
-   * Selectors targeting the specific path found in your state.json:
-   * router > state > root > queryParams
-   */
-  selectRouterState = createFeatureSelector<CustomRouterState>('router');
-
-  selectSearchTerm = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.query,
-  );
-
-  selectSearchScope = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.search_scope,
-  );
-
-  selectSearchTab = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.tab,
-  );
-
-  selectSearchView = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.vid,
-  );
-
-  selectSearchExpanded = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.pcAvailability,
-  );
-
   // Signals linked to the selectors
-  searchTerm: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchTerm,
-  );
+  searchTerm: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchTerm);
 
-  searchScope: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchScope,
-  );
+  searchScope: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchScope);
 
-  searchTab: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchTab,
-  );
+  searchTab: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchTab);
 
-  searchView: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchView,
-  );
+  searchView: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchView);
 
-  searchExpanded: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchExpanded,
-  );
+  searchExpanded: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchExpanded);
 
   // derived/computed values
   private readonly encodedSearchTerm = computed((): string =>

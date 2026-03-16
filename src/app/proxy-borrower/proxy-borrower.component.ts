@@ -45,14 +45,13 @@ export class ProxyBorrowerComponent {
         )
       : false;
   });
-
 }
 
 // Updated selectors for the 'account' feature
 const selectAccountState = createFeatureSelector<CustomAccountState>('account');
 const selectPatronStatus = createSelector(
   selectAccountState,
-  (accountState) => accountState.personalDetails.patronstatus,
+  (accountState) => accountState?.personalDetails?.patronstatus,
 );
 const selectPatronStatusName = createSelector(
   selectPatronStatus,

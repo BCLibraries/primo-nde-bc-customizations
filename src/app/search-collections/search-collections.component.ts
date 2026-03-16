@@ -14,6 +14,12 @@ interface CustomRouterState {
   };
 }
 
+const selectRouterState = createFeatureSelector<CustomRouterState>('router');
+const selectSearchView = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.['vid'],
+);
+
 @Component({
   selector: 'custom-search-collections',
   standalone: true,
@@ -23,14 +29,10 @@ interface CustomRouterState {
 })
 export class SearchCollectionsComponent {
   private store = inject(Store);
-  selectRouterState = createFeatureSelector<CustomRouterState>('router');
-  selectSearchView = createSelector(
-    this.selectRouterState,
-    (router) => router?.state?.root?.queryParams?.['vid'],
-  );
-  searchView: Signal<string | undefined> = this.store.selectSignal(
-    this.selectSearchView,
-  );
+
+  searchView: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchView);
+
   private readonly encodedSearchView = computed((): string =>
     encodeURIComponent(this.searchView() || ''),
   );
