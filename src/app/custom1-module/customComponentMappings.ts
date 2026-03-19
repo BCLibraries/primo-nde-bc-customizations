@@ -3,6 +3,8 @@ import { ProxyBorrowerComponent } from '../proxy-borrower/proxy-borrower.compone
 import { HathiTrustComponent } from '../hathi-trust/hathi-trust.component';
 import { SearchCollectionsComponent } from '../search-collections/search-collections.component';
 import { LinksFilterComponent } from '../links-filter/links-filter.component';
+import { RequestServicesComponent } from '../request-services/request-services.component';
+import { UserAreaComponent } from '../user-area/user-area.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -11,4 +13,6 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-online-availability-before', HathiTrustComponent],
   ['nde-collection-discovery-search-bar', SearchCollectionsComponent],
   ['nde-full-display-links-after', LinksFilterComponent],
+  ['nde-location-after', RequestServicesComponent],
+  ['nde-user-area-after', UserAreaComponent],
 ]);
