@@ -40,6 +40,8 @@ export class FindingAidsComponent implements OnInit {
     private el: ElementRef,
   ) {}
 
+// Add finding aid button to brief display availability, if lds08 is present
+
   ngOnInit(): void {
     const parser = new DOMParser();
     const textArea = document.createElement('textarea');
