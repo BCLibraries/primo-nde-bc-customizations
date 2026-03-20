@@ -8,6 +8,7 @@ import { UserAreaComponent } from '../user-area/user-area.component';
 import { FindingAidsComponent } from '../finding-aids/finding-aids.component';
 import { OffsiteAvailabilityComponent } from '../offsite-availability/offsite-availability.component';
 import { HideLocateComponent } from '../hide-locate/hide-locate.component';
+import { InstitutionalLoginComponent } from '../institutional-login/institutional-login.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -21,4 +22,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-online-availability-top', FindingAidsComponent],
   ['nde-physical-availability-line-after', OffsiteAvailabilityComponent],
   ['nde-location-before', HideLocateComponent],
+  ['nde-view-it-section-after', InstitutionalLoginComponent],
 ]);
