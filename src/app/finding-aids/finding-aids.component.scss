@@ -1,0 +1,27 @@
+.custom-finding-aids-container {
+  margin-top: 2px;
+
+  .finding-aids-button {
+    /* Remove unwanted left margin */
+    margin-left: 0 !important;
+
+    /* Match Hathi Trust / quicklink-button color styling */
+    --mdc-outlined-button-outline-color: var(--sys-primary);
+    --mdc-outlined-button-outline-width: 1px;
+
+    /* Match Hathi Trust dimensions */
+    --mdc-outlined-button-container-height: 32px;
+    --mdc-outlined-button-container-shape: 4px;
+    height: 32px !important;
+    border-radius: 4px !important;
+    padding: 0 16px !important;
+
+    background-color: #ffffff;
+    font-weight: 400 !important;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}

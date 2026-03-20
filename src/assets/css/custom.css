@@ -2,7 +2,7 @@
   --sys-primary: #8a1009;
 }
 
-/* Brief Display styles */
+/* --- Brief Display styles --- */
 
 /* remove padding for empty label */
 span.margin-right-small:empty {
@@ -19,16 +19,34 @@ span.flex-row.ng-star-inserted {
   margin-inline-end: .25rem;
 }
 
+/* fix gap spacing for availability buttons */
+/* 1. Make the wrapper transparent to the Flexbox layout */
+.responsive-availability-layout > ng-component {
+  display: contents;
+}
 
-/* Full Record display styles */
+/* 2. Hide the inner custom component if it is completely empty */
+.responsive-availability-layout > ng-component > *:empty {
+  display: none;
+}
+
+
+
+/* --- Full Record display styles --- */
 
 /* hide item-level request note by default -- changes by customization if item-level request is available */
 div#item-level-request-msg {
   display: none;
 }
 
+/* Align item metadata with item request button */
 
-/* Homepage styles */
+.grid-header .getit-items-brief-property span {
+	line-height: 2.5 !important;
+}
+
+
+/* --- Homepage styles --- */
 
 /* do not add color overlay to homepage image */
 .custom-search-bar-container .background-overlay {

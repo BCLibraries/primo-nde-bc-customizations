@@ -1,0 +1,14 @@
+<ng-container *ngIf="findingAidLinks$ | async as links">
+  <div class="custom-finding-aids-container" *ngFor="let link of links">
+    <a
+      [href]="link.href"
+      target="_blank"
+      mat-stroked-button
+      color="primary"
+      class="finding-aids-button"
+      aria-label="Open Finding Aid"
+    >
+      {{ link.text }}
+    </a>
+  </div>
+</ng-container>

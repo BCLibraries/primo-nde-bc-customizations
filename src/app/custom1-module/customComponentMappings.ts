@@ -5,6 +5,7 @@ import { SearchCollectionsComponent } from '../search-collections/search-collect
 import { LinksFilterComponent } from '../links-filter/links-filter.component';
 import { RequestServicesComponent } from '../request-services/request-services.component';
 import { UserAreaComponent } from '../user-area/user-area.component';
+import { FindingAidsComponent } from '../finding-aids/finding-aids.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -15,4 +16,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-full-display-links-after', LinksFilterComponent],
   ['nde-location-after', RequestServicesComponent],
   ['nde-user-area-after', UserAreaComponent],
+  ['nde-online-availability-top', FindingAidsComponent],
 ]);
