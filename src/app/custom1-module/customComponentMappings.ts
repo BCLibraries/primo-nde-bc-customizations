@@ -7,6 +7,7 @@ import { RequestServicesComponent } from '../request-services/request-services.c
 import { UserAreaComponent } from '../user-area/user-area.component';
 import { FindingAidsComponent } from '../finding-aids/finding-aids.component';
 import { OffsiteAvailabilityComponent } from '../offsite-availability/offsite-availability.component';
+import { HideLocateComponent } from '../hide-locate/hide-locate.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -18,5 +19,6 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-location-after', RequestServicesComponent],
   ['nde-user-area-after', UserAreaComponent],
   ['nde-online-availability-top', FindingAidsComponent],
-  ['nde-physical-availability-line-after', OffsiteAvailabilityComponent]
+  ['nde-physical-availability-line-after', OffsiteAvailabilityComponent],
+  ['nde-location-before', HideLocateComponent],
 ]);
