@@ -30,6 +30,14 @@ span.flex-row.ng-star-inserted {
   display: none;
 }
 
+/* Capitalize local display field facets */
+nde-filters-group#lds01 span.mdc-button__label {
+    text-transform: uppercase;
+}
+
+nde-filters-group#lds45 span.mdc-button__label {
+    text-transform: capitalize;
+}
 
 
 /* --- Full Record display styles --- */
@@ -57,3 +65,15 @@ div#item-level-request-msg {
 .custom-search-bar-container h2 {
   text-shadow: 2px 2px 2px #313131; 
 }
+
+
+/* --- Colors --- */
+
+/* fill color for menu containers */
+/*
+:root .nde-overrides {
+  --mat-sys-surface-container-low: var(--lightBG);
+  --mdc-elevated-card-container-color: var(--lightBG);
+  --sys-inverse-on-surface: var(--lightBG);
+}
+  */
