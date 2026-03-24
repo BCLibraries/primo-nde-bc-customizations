@@ -36,25 +36,61 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
   private handleDocumentClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
     const button = target.closest('button.view-it-card-no-license-container');
-    
-    if (button && button.textContent?.trim().startsWith('Sign In')) {
+
+    // Use toLowerCase() and includes() to be immune to weird spacing or casing in Prod
+    if (button && button.textContent?.toLowerCase().includes('sign in')) {
+      // Guard against multiple component instances overriding the global methods concurrently
+      if ((window as any)._isSignInPatched) return;
+      (window as any)._isSignInPatched = true;
+
       const originalOpen = window.open;
-      
-      // Temporarily override window.open to force same-tab navigation
-      window.open = function(url?: string | URL, targetName?: string, features?: string) {
+      const originalCreateElement = document.createElement;
+
+      let timeoutId: ReturnType<typeof setTimeout>;
+
+      const restoreOriginals = () => {
+        if (window.open !== originalOpen) window.open = originalOpen;
+        if (document.createElement !== originalCreateElement)
+          document.createElement = originalCreateElement;
+        (window as any)._isSignInPatched = false;
+        clearTimeout(timeoutId);
+      };
+
+      window.open = function (
+        url?: string | URL,
+        targetName?: string,
+        features?: string,
+      ) {
         if (url) {
           window.location.href = url.toString();
         }
-        window.open = originalOpen;
+        restoreOriginals();
         return null;
       };
 
-      // Restore it after a short delay in case Primo resolves the link asynchronously or aborts
-      setTimeout(() => {
-        if (window.open !== originalOpen) {
-          window.open = originalOpen;
+      // Temporarily override document.createElement to catch dynamically created <a> tags
+      document.createElement = function (
+        tagName: string,
+        options?: ElementCreationOptions,
+      ) {
+        const el = originalCreateElement.call(document, tagName, options);
+        if (tagName.toLowerCase() === 'a') {
+          const originalClick = el.click;
+          el.click = function () {
+            const anchor = el as HTMLAnchorElement;
+            if (anchor.href) {
+              window.location.href = anchor.href;
+              restoreOriginals();
+              return;
+            }
+            return originalClick.apply(this, arguments as any);
+          };
         }
-      }, 1000);
+        return el;
+      } as typeof document.createElement;
+
+      // Increase timeout to 10 seconds for safety
+      timeoutId = setTimeout(restoreOriginals, 10000);
     }
   };
 
@@ -125,7 +161,11 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const parent = this.el.nativeElement.parentElement || document.body;
+    // Scope the observer to the current record's container to improve performance
+    const parent =
+      this.el.nativeElement.closest('nde-full-display-container') ||
+      this.el.nativeElement.parentElement ||
+      document.body;
     this.observer = new MutationObserver(() => {
       this.hideViewItSection();
     });
