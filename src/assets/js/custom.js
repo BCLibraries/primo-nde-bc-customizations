@@ -1,6 +1,7 @@
+/* Google Tag Manager */
+
 var GTM_ID = "GTM-5R4S8V4"; /* GA/GTM Container ID for environment */
 
-/* Google Tag Manager */
 const gtmId = GTM_ID;
 function addGTM(doc) {
   const newScript = doc.createElement("script");

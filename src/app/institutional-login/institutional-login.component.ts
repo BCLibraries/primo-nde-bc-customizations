@@ -33,6 +33,31 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
   private observer: MutationObserver | null = null;
   private cachedDomRecordId: string | null = null;
 
+  private handleDocumentClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    const button = target.closest('button.view-it-card-no-license-container');
+    
+    if (button && button.textContent?.trim().startsWith('Sign In')) {
+      const originalOpen = window.open;
+      
+      // Temporarily override window.open to force same-tab navigation
+      window.open = function(url?: string | URL, targetName?: string, features?: string) {
+        if (url) {
+          window.location.href = url.toString();
+        }
+        window.open = originalOpen;
+        return null;
+      };
+
+      // Restore it after a short delay in case Primo resolves the link asynchronously or aborts
+      setTimeout(() => {
+        if (window.open !== originalOpen) {
+          window.open = originalOpen;
+        }
+      }, 1000);
+    }
+  };
+
   @Input()
   set item(value: any) {
     this.itemSubject.next(value);
@@ -84,11 +109,15 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
         }
       }),
     );
+
+    // Intercept clicks in the capture phase (before Primo's handler triggers)
+    document.addEventListener('click', this.handleDocumentClick, true);
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.disconnectObserver();
+    document.removeEventListener('click', this.handleDocumentClick, true);
   }
 
   private setupObserver(): void {
