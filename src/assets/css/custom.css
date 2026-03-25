@@ -1,22 +1,33 @@
+/* --- Colors --- */
+
 :root {
   --sys-primary: #8a1009;
 }
+
+/* fill color for menu containers */
+/*
+:root .nde-overrides {
+  --mat-sys-surface-container-low: var(--lightBG);
+  --mdc-elevated-card-container-color: var(--lightBG);
+  --sys-inverse-on-surface: var(--lightBG);
+}
+  */
 
 /* --- Brief Display styles --- */
 
 /* remove padding for empty label */
 span.margin-right-small:empty {
-	margin-inline-end: unset;
+  margin-inline-end: unset;
 }
 
 /* align label line-height with content */
 p.record-main-details-font-size span.light-text.margin-right-small {
-	line-height: 1.25rem;
+  line-height: 1.25rem;
 }
 
 /* add space after delimiter */
 span.flex-row.ng-star-inserted {
-  margin-inline-end: .25rem;
+  margin-inline-end: 0.25rem;
 }
 
 /* fix gap spacing for availability buttons */
@@ -32,13 +43,12 @@ span.flex-row.ng-star-inserted {
 
 /* Capitalize local display field facets */
 nde-filters-group#lds01 span.mdc-button__label {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 nde-filters-group#lds45 span.mdc-button__label {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
-
 
 /* --- Full Record display styles --- */
 
@@ -50,9 +60,8 @@ div#item-level-request-msg {
 /* Align item metadata with item request button */
 
 .grid-header .getit-items-brief-property span {
-	line-height: 2.5 !important;
+  line-height: 2.5 !important;
 }
-
 
 /* --- Homepage styles --- */
 
@@ -63,17 +72,19 @@ div#item-level-request-msg {
 
 /* improve h2 definition against background image */
 .custom-search-bar-container h2 {
-  text-shadow: 2px 2px 2px #313131; 
+  text-shadow: 2px 2px 2px #313131;
 }
 
+/* --- Virtual Browse styles --- */
 
-/* --- Colors --- */
-
-/* fill color for menu containers */
-/*
-:root .nde-overrides {
-  --mat-sys-surface-container-low: var(--lightBG);
-  --mdc-elevated-card-container-color: var(--lightBG);
-  --sys-inverse-on-surface: var(--lightBG);
+/* prevent default thumbnail for "other" format from displaying for all titles without cover images */
+nde-virtual-browse-card
+  img[src="http://localhost:4201/nde/assets/images/defaultThumbnailIcons/icon_other.png"] {
+  display: none !important;
 }
-  */
+
+/* --- LibMaps styles --- */
+
+.springy-button {
+  margin-left: 1em;
+}
