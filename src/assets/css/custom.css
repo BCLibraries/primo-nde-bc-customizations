@@ -79,7 +79,7 @@ div#item-level-request-msg {
 
 /* prevent default thumbnail for "other" format from displaying for all titles without cover images */
 nde-virtual-browse-card
-  img[src="http://localhost:4201/nde/assets/images/defaultThumbnailIcons/icon_other.png"] {
+  img[src*="icon_other.png"] {
   display: none !important;
 }
 
