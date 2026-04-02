@@ -50,6 +50,16 @@ nde-filters-group#lds45 span.mdc-button__label {
   text-transform: capitalize;
 }
 
+/* italicize snippets */
+nde-record-snippet span {
+  font-style: italic;
+}
+
+/* hide LibMaps button in brief display */
+nde-record-availability button.springy-button {
+  display: none;
+}
+
 /* --- Full Record display styles --- */
 
 /* hide item-level request note by default -- changes by customization if item-level request is available */
@@ -57,10 +67,30 @@ div#item-level-request-msg {
   display: none;
 }
 
-/* Align item metadata with item request button */
+/* prevent item details from centering vertically */
+nde-location-item mat-expansion-panel mat-expansion-panel-header {
+  align-items: normal !important;
+}
 
+/* align item metadata with item request button */
 .grid-header .getit-items-brief-property span {
   line-height: 2.5 !important;
+}
+
+/* remove icons from request ges card */
+nde-request-card div.request-card-icon-title-subtitle div.column-for-icon {
+  display: none;
+}
+
+/* add padding to request card button label */
+nde-request-card div a.request-button span.mdc-button__label {
+  padding-left: 20px;
+}
+
+/* make external link icon white when inside a request button */
+nde-request-card div a.request-button mat-icon.mat-icon svg g path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
 /* --- Homepage styles --- */
@@ -75,11 +105,18 @@ div#item-level-request-msg {
   text-shadow: 2px 2px 2px #313131;
 }
 
+/* ask anything and adv search visible buttons */
+nde-top-bar button.advanced-search-btn-home-page {
+  background-color: var(
+    --mdc-filled-button-container-color,
+    var(--mat-sys-primary)
+  );
+}
+
 /* --- Virtual Browse styles --- */
 
 /* prevent default thumbnail for "other" format from displaying for all titles without cover images */
-nde-virtual-browse-card
-  img[src*="icon_other.png"] {
+nde-virtual-browse-card img[src*="icon_other.png"] {
   display: none !important;
 }
 
