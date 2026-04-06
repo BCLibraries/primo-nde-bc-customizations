@@ -48,6 +48,9 @@ export class OffsiteAvailabilityComponent implements OnInit, OnDestroy {
     const spans = physLine.querySelectorAll('span');
 
     spans.forEach((span: Element) => {
+      // Skip spans that contain other HTML elements to avoid destroying child elements like the <span class="light-text">
+      if (span.children.length > 0) return;
+
       // Skip if we already processed this element to avoid infinite observer loops
       if (span.hasAttribute('data-stripped-call-number')) return;
 

@@ -10,6 +10,8 @@ import { OffsiteAvailabilityComponent } from '../offsite-availability/offsite-av
 import { HideLocateComponent } from '../hide-locate/hide-locate.component';
 import { InstitutionalLoginComponent } from '../institutional-login/institutional-login.component';
 import { RequestCardComponent } from '../request-card/request-card.component';
+import { JournalsCategoriesComponent } from '../journals-categories/journals-categories.component';
+import { ReportProblemComponent } from '../report-problem/report-problem.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -25,4 +27,6 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-location-before', HideLocateComponent],
   ['nde-view-it-section-after', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
+  ['nde-categories-before', JournalsCategoriesComponent],
+  ['nde-report-a-problem-before', ReportProblemComponent],
 ]);

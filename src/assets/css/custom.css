@@ -125,3 +125,15 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
 .springy-button {
   margin-left: 1em;
 }
+
+/* --- Report a Problem styles --- */
+
+nde-report-a-problem > button > mat-icon {
+	height: 24px !important;
+	width: 24px !important;
+}
+
+/* Permanently hide the original material icon tag instantly on page load -- see report-problem.component.ts */
+nde-report-a-problem button mat-icon {
+  display: none !important;
+}
