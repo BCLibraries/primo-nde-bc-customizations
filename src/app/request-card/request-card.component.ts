@@ -62,7 +62,7 @@ export class RequestCardComponent implements AfterViewInit, OnDestroy {
       requestCards.forEach((card: any) => {
         const root = card.shadowRoot || card;
         const cardButtons = Array.from(
-          root.querySelectorAll('a.go-to-link-button'),
+          root.querySelectorAll('a.basic-button'),
         ) as Element[];
         buttons = [...buttons, ...cardButtons];
       });
@@ -74,16 +74,6 @@ export class RequestCardComponent implements AfterViewInit, OnDestroy {
         this.renderer.addClass(button, 'request-button');
         this.renderer.removeClass(button, 'margin-right-small');
         this.renderer.removeClass(button, 'go-to-link-button');
-
-        // Look for the mat-icon immediately following the a element
-        const nextSibling = button.nextElementSibling;
-        if (nextSibling && nextSibling.tagName.toLowerCase() === 'mat-icon') {
-          const labelSpan = button.querySelector('span.mdc-button__label');
-          
-          // Move the mat-icon inside the button, right after the span label
-          const referenceNode = labelSpan ? labelSpan.nextSibling : null;
-          this.renderer.insertBefore(button, nextSibling, referenceNode);
-        }
       }
     });
   }
