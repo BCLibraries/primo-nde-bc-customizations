@@ -1,0 +1,21 @@
+export const illiadOptions = {
+  groups: [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '28',
+    '31',
+    '34',
+    '36',
+    '37',
+  ],
+  remoteScript: 'https://library.bc.edu/illiad-api/illiad.php',
+  boxTitle: 'Interlibrary Loan',
+  illiadURL: 'https://illiad.bc.edu/illiad/BXM/illiad.dll',
+};

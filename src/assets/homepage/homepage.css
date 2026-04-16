@@ -184,6 +184,7 @@
         padding: 2rem;
         background-color: var(--sys-inverse-on-surface);
         gap: 1.5rem;
+        min-width: 60%;
 
         @include mixing.respond-to('small', 'xsmall') {
           padding: 1rem;
@@ -241,9 +242,8 @@
       .about-image {
         img {
           width: auto;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 0 .625rem .625rem 0;
+          height: auto;
+          object-fit: contain;
 
           @include mixing.respond-to('small', 'xsmall') {
             border-radius: .625rem .625rem 0 0;

@@ -4,6 +4,14 @@
   --sys-primary: #8a1009;
 }
 
+a {
+  color: #376282;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 /* fill color for menu containers */
 /*
 :root .nde-overrides {
