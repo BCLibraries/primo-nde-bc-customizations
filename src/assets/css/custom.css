@@ -63,11 +63,6 @@ nde-record-snippet span {
   font-style: italic;
 }
 
-/* hide LibMaps button in brief display */
-nde-record-availability button.springy-button {
-  display: none;
-}
-
 /* --- Full Record display styles --- */
 
 /* hide item-level request note by default -- changes by customization if item-level request is available */
@@ -136,6 +131,19 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
 
 .springy-button {
   margin-left: 1em;
+}
+
+/* hide LibMaps button in brief display */
+nde-record-availability button.springy-button {
+  display: none;
+}
+
+/* --- Libh3lp styles --- */
+
+@media (max-width: 960px) {
+  div.lh3-chat-widget {
+    top: 75% !important;
+  }
 }
 
 /* --- Report a Problem styles --- */

@@ -176,6 +176,7 @@
 
   .about {
     .about-content {
+      overflow: hidden;
       @include mixing.respond-to('small', 'xsmall') {
         flex-direction: column-reverse;
       }
@@ -184,7 +185,7 @@
         padding: 2rem;
         background-color: var(--sys-inverse-on-surface);
         gap: 1.5rem;
-        min-width: 60%;
+        min-width: 50%;
 
         @include mixing.respond-to('small', 'xsmall') {
           padding: 1rem;
@@ -242,8 +243,13 @@
       .about-image {
         img {
           width: auto;
-          height: auto;
-          object-fit: contain;
+          height: auto; 
+          object-fit: cover;
+
+          @media (max-width: 960px) {
+            width: 100%;
+            height: auto;
+          }
 
           @include mixing.respond-to('small', 'xsmall') {
             border-radius: .625rem .625rem 0 0;
