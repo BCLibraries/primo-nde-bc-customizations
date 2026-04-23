@@ -1,18 +1,23 @@
 @use "src/app/styles/nde-variables" as vars;
 @use "src/app/styles/nde-mixing" as mixing;
 
-.main-landing-page {
-  width: vars.$responsiveWidth;
-  @include vars.set-responsive-width;
-  margin: 0 auto;
-  gap: 5rem;
-  //need to delete when the Featured Books will be developed
-  margin-block-end: 100px;
+/* do not add color overlay to homepage image */
+.custom-search-bar-container .background-overlay {
+  display: none;
+}
 
-  @include mixing.respond-to('xsmall') {
-    width: 100%;
-  }
+/* improve h2 definition against background image */
+.custom-search-bar-container h2 {
+  text-shadow: 2px 2px 2px #313131;
+}
 
+/* ask anything and adv search visible buttons */
+nde-top-bar button.advanced-search-btn-home-page {
+  background-color: var(
+    --mdc-filled-button-container-color,
+    var(--mat-sys-primary)
+  );
+}
 
   .menu-container {
     .menu {
@@ -242,13 +247,11 @@
 
       .about-image {
         img {
-          width: auto;
-          height: auto; 
-          object-fit: cover;
+          object-fit: contain;
 
           @media (max-width: 960px) {
-            width: 100%;
-            height: auto;
+            width: auto;
+            height: 100%;
           }
 
           @include mixing.respond-to('small', 'xsmall') {

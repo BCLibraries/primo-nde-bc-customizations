@@ -11,8 +11,9 @@ import { HideLocateComponent } from '../hide-locate/hide-locate.component';
 import { InstitutionalLoginComponent } from '../institutional-login/institutional-login.component';
 import { RequestCardComponent } from '../request-card/request-card.component';
 import { JournalsCategoriesComponent } from '../journals-categories/journals-categories.component';
-import { ReportProblemComponent } from '../report-problem/report-problem.component';
+//  import { ReportProblemComponent } from '../report-problem/report-problem.component';
 import { IllLoansOverviewComponent } from '../ill/ill-loans-overview.component';
+import { LibraryLogoComponent } from '../library-logo/library-logo.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -29,7 +30,9 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-view-it-section-after', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
   ['nde-categories-before', JournalsCategoriesComponent],
-  ['nde-report-a-problem-before', ReportProblemComponent],
+//  ['nde-report-a-problem-before', ReportProblemComponent],
   ['nde-requests-page-after', IllLoansOverviewComponent],
   ['nde-account-overview-bottom', IllLoansOverviewComponent],
+  ['nde-logo-after', LibraryLogoComponent]
+
 ]);

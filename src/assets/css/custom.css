@@ -1,3 +1,11 @@
+/* --- General styles --- */
+
+nde-logo {
+  flex: none !important;
+  height: 35px;
+  width: auto;
+}
+
 /* --- Colors --- */
 
 :root {
@@ -12,14 +20,6 @@ a {
   }
 }
 
-/* fill color for menu containers */
-/*
-:root .nde-overrides {
-  --mat-sys-surface-container-low: var(--lightBG);
-  --mdc-elevated-card-container-color: var(--lightBG);
-  --sys-inverse-on-surface: var(--lightBG);
-}
-  */
 
 /* --- Brief Display styles --- */
 
@@ -70,15 +70,19 @@ div#item-level-request-msg {
   display: none;
 }
 
-/* prevent item details from centering vertically */
-nde-location-item mat-expansion-panel mat-expansion-panel-header {
-  align-items: normal !important;
-  padding-top: 8px !important;
+/* keep item metadata vertically centered when item-level request button displays */
+nde-location-item mat-expansion-panel-header > span.mat-content > div.grid-header {
+  align-items: center !important;
 }
 
-/* align item metadata with item request button */
-.grid-header .getit-items-brief-property span {
-  line-height: 2.5 !important;
+/* reduce size of item metadata */
+.grid-header .getit-items-brief-property span, .getit-item-key, .getit-item-value {
+  font-size: 90% !important;
+  font-weight: 400 !important;
+  
+  span.getit-service-button {
+    font-size: 100% !important;
+  }
 }
 
 /* GES request button customization */
@@ -101,24 +105,7 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 }
 
 /* --- Homepage styles --- */
-
-/* do not add color overlay to homepage image */
-.custom-search-bar-container .background-overlay {
-  display: none;
-}
-
-/* improve h2 definition against background image */
-.custom-search-bar-container h2 {
-  text-shadow: 2px 2px 2px #313131;
-}
-
-/* ask anything and adv search visible buttons */
-nde-top-bar button.advanced-search-btn-home-page {
-  background-color: var(
-    --mdc-filled-button-container-color,
-    var(--mat-sys-primary)
-  );
-}
+/* -- see ../homepage/homepage.css for landing page styles -- */
 
 /* --- Virtual Browse styles --- */
 
