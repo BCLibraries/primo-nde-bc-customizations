@@ -153,7 +153,7 @@ nde-report-a-problem > button > mat-icon {
   width: 24px !important;
 }
 
-/* Permanently hide the original material icon tag instantly on page load -- see report-problem.component.ts */
+/* Permanently hide the original material icon tag instantly on page load */
 nde-report-a-problem button mat-icon {
   display: none !important;
 }

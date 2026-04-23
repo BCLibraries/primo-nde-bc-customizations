@@ -31,5 +31,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-categories-before', JournalsCategoriesComponent],
   ['nde-report-a-problem-before', ReportProblemComponent],
   ['nde-requests-page-after', IllLoansOverviewComponent],
-  ['nde-account-overview-after', IllLoansOverviewComponent],
+  ['nde-account-overview-bottom', IllLoansOverviewComponent],
 ]);
