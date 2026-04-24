@@ -14,6 +14,7 @@ import { JournalsCategoriesComponent } from '../journals-categories/journals-cat
 //  import { ReportProblemComponent } from '../report-problem/report-problem.component';
 import { IllLoansOverviewComponent } from '../ill/ill-loans-overview.component';
 import { LibraryLogoComponent } from '../library-logo/library-logo.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -30,9 +31,9 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-view-it-section-after', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
   ['nde-categories-before', JournalsCategoriesComponent],
-//  ['nde-report-a-problem-before', ReportProblemComponent],
+  //  ['nde-report-a-problem-before', ReportProblemComponent],
   ['nde-requests-page-after', IllLoansOverviewComponent],
   ['nde-account-overview-bottom', IllLoansOverviewComponent],
-  ['nde-logo-after', LibraryLogoComponent]
-
+  ['nde-logo-after', LibraryLogoComponent],
+  ['nde-search-bar-presenter-top', SearchBarComponent],
 ]);
