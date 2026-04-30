@@ -20,7 +20,6 @@ a {
   }
 }
 
-
 /* --- Brief Display styles --- */
 
 /* remove padding for empty label */
@@ -71,15 +70,20 @@ div#item-level-request-msg {
 }
 
 /* keep item metadata vertically centered when item-level request button displays */
-nde-location-item mat-expansion-panel-header > span.mat-content > div.grid-header {
+nde-location-item
+  mat-expansion-panel-header
+  > span.mat-content
+  > div.grid-header {
   align-items: center !important;
 }
 
 /* reduce size of item metadata */
-.grid-header .getit-items-brief-property span, .getit-item-key, .getit-item-value {
+.grid-header .getit-items-brief-property span,
+.getit-item-key,
+.getit-item-value {
   font-size: 90% !important;
   font-weight: 400 !important;
-  
+
   span.getit-service-button {
     font-size: 100% !important;
   }
@@ -123,6 +127,12 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
 /* hide LibMaps button in brief display */
 nde-record-availability button.springy-button {
   display: none;
+}
+
+/* -- User Account styles --- */
+
+nde-personal-settings mat-card-actions {
+  display: none !important;
 }
 
 /* --- Libh3lp styles --- */
