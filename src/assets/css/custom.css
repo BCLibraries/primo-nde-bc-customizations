@@ -118,6 +118,12 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
   display: none !important;
 }
 
+/* -- User Account styles --- */
+
+nde-personal-settings mat-card-actions {
+  display: none !important;
+}
+
 /* --- LibMaps styles --- */
 
 .springy-button {
@@ -127,12 +133,6 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
 /* hide LibMaps button in brief display */
 nde-record-availability button.springy-button {
   display: none;
-}
-
-/* -- User Account styles --- */
-
-nde-personal-settings mat-card-actions {
-  display: none !important;
 }
 
 /* --- Libh3lp styles --- */
