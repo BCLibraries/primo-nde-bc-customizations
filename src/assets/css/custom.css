@@ -114,6 +114,12 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
   display: none !important;
 }
 
+/* -- User Account styles --- */
+
+nde-personal-settings mat-card-actions {
+  display: none !important;
+}
+
 /* --- LibMaps styles --- */
 
 .springy-button {
