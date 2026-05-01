@@ -89,6 +89,11 @@ nde-location-item
   }
 }
 
+/* hide search within journal component -- otherwise displays for all journals with ISSNs, even if we don't have CDI activated for that journal */
+nde-search-within-journal {
+  display: none;
+}
+
 /* GES request button customization */
 nde-requests > nde-request-card > mat-card > mat-card-content {
   /* remove icons from request ges card */
