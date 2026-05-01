@@ -57,7 +57,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
       const placeholders: Record<string, string> = {
         Everything: 'Search the entire catalog',
-        'Books and more': 'Search for books, journals, media, and more',
+        'Books & more': 'Search for books, journals, media, and more',
         Articles: 'Search for articles and other database content',
       };
 
