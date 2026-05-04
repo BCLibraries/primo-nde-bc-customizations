@@ -23,7 +23,12 @@ a {
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
-  max-height: 150px !important;
+  object-fit: contain !important;
+  padding: .5rem;
+}
+
+.cdk-virtual-scroll-content-wrapper.contentWrapperOneCard {
+    height: 100% !important;
 }
 
 .resource-recommender-banner-overlay {
@@ -99,20 +104,15 @@ div#item-level-request-msg {
 }
 
 /* keep item metadata vertically centered when item-level request button displays */
-nde-location-item
-  mat-expansion-panel-header
-  > span.mat-content
-  > div.grid-header {
+nde-location-item mat-expansion-panel-header > span.mat-content > div.grid-header {
   align-items: center !important;
 }
 
 /* reduce size of item metadata */
-.grid-header .getit-items-brief-property span,
-.getit-item-key,
-.getit-item-value {
+.grid-header .getit-items-brief-property span, .getit-item-key, .getit-item-value {
   font-size: 90% !important;
   font-weight: 400 !important;
-
+  
   span.getit-service-button {
     font-size: 100% !important;
   }
