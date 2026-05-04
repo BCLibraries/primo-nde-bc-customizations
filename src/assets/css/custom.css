@@ -23,7 +23,12 @@ a {
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
-  max-height: 150px !important;
+  object-fit: contain !important;
+  padding: .5rem;
+}
+
+.cdk-virtual-scroll-content-wrapper.contentWrapperOneCard {
+    height: 100% !important;
 }
 
 .resource-recommender-banner-overlay {
