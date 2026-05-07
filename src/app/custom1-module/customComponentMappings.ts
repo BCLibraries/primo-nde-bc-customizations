@@ -18,7 +18,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
-  ['nde-search-no-results', NoResultsComponent],
+  ['nde-search-no-results-before', NoResultsComponent],
   ['nde-personal-details-view-after', ProxyBorrowerComponent],
   ['nde-online-availability-before', HathiTrustComponent],
   ['nde-collection-discovery-search-bar', SearchCollectionsComponent],

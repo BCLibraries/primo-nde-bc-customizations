@@ -1,5 +1,14 @@
 /* --- General styles --- */
 
+@font-face {
+  font-display: swap;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/custom/01BC_INST-scot_nde/assets/fonts/roboto-v51-latin_latin-ext-regular.woff2)
+    format("woff2");
+}
+
 nde-logo {
   flex: none !important;
   height: 35px;
@@ -20,15 +29,37 @@ a {
   }
 }
 
+/* --- Header styles --- */
+
+header.top-bar {
+  background: #8a100b !important;
+
+  a, span.mdc-button__label,
+  li,
+  .external-link-container,
+  mat-icon,
+  .mat-icon svg path {
+    color: #fff !important;
+  }
+
+  mat-divider {
+    border-right-color: #fff !important;
+  }
+
+  .mat-icon svg g path {
+    fill: #fff !important;
+  }
+}
+
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
   object-fit: contain !important;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .cdk-virtual-scroll-content-wrapper.contentWrapperOneCard {
-    height: 100% !important;
+  height: 100% !important;
 }
 
 .resource-recommender-banner-overlay {
@@ -104,15 +135,20 @@ div#item-level-request-msg {
 }
 
 /* keep item metadata vertically centered when item-level request button displays */
-nde-location-item mat-expansion-panel-header > span.mat-content > div.grid-header {
+nde-location-item
+  mat-expansion-panel-header
+  > span.mat-content
+  > div.grid-header {
   align-items: center !important;
 }
 
 /* reduce size of item metadata */
-.grid-header .getit-items-brief-property span, .getit-item-key, .getit-item-value {
+.grid-header .getit-items-brief-property span,
+.getit-item-key,
+.getit-item-value {
   font-size: 90% !important;
   font-weight: 400 !important;
-  
+
   span.getit-service-button {
     font-size: 100% !important;
   }
