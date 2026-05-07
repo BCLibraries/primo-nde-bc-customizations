@@ -1,0 +1,14 @@
+#list-of-suggestions {
+  /* Restore the left padding so the bullets have room to show */
+  padding-left: 1.5rem; 
+  margin-top: 0.5rem;
+
+  li {
+    /* Force the element to behave as a list item again */
+    display: list-item; 
+    /* Set the bullet style */
+    list-style-type: disc; 
+    /* Add a little breathing room between suggestions */
+    margin-bottom: 0.5rem; 
+  }
+}

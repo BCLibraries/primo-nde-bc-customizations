@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Signal, computed } from '@angular/core';
+import {
+  Component,
+  inject,
+  Signal,
+  computed,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -60,8 +68,10 @@ const selectSearchExpanded = createSelector(
   templateUrl: './no-results.component.html',
   styleUrl: './no-results.component.scss',
 })
-export class NoResultsComponent {
+export class NoResultsComponent implements AfterViewInit, OnDestroy {
   private store = inject(Store);
+  private el = inject(ElementRef);
+  private observer?: MutationObserver;
 
   // Signals linked to the selectors
   searchTerm: Signal<string | undefined> =
@@ -112,7 +122,42 @@ export class NoResultsComponent {
       : `Sorry, no results were found.`;
   });
 
-  // no constructor or lifecycle methods needed; messages & flags come from computed signals
+  ngAfterViewInit() {
+    const customElement = this.el.nativeElement;
+
+    const swapElements = (): boolean => {
+      const primoNoResults = document.querySelector('nde-search-no-results');
+      if (primoNoResults) {
+        const primoUl = primoNoResults.querySelector('ul#list-of-suggestions');
+        if (primoUl && primoUl.parentNode) {
+          // Hide the original list instead of removing it to avoid breaking Primo's scripts
+          (primoUl as HTMLElement).style.display = 'none';
+          // Insert our custom component right after the hidden Primo list
+          primoUl.parentNode.insertBefore(customElement, primoUl.nextSibling);
+          return true;
+        }
+      }
+      return false;
+    };
+
+    // Try to swap immediately in case the DOM is already ready
+    if (!swapElements()) {
+      // Otherwise, set up a MutationObserver to wait for Primo to render the element
+      const observeTarget =
+        customElement.parentElement?.parentElement || document.body;
+      this.observer = new MutationObserver(() => {
+        if (swapElements()) {
+          this.observer?.disconnect();
+        }
+      });
+
+      this.observer.observe(observeTarget, { childList: true, subtree: true });
+    }
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
+  }
 
   // keep searchTermValue getter for the template; everything else uses computed signals
   get searchTermValue(): string | undefined {
