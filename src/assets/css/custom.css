@@ -51,6 +51,11 @@ header.top-bar {
   }
 }
 
+#user-area-button > span.ng-star-inserted {
+  color: var(--sys-primary) !important;
+  background-color: #fff !important;
+}
+
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {

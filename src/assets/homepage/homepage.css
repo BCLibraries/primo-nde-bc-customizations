@@ -1,6 +1,11 @@
 @use "src/app/styles/nde-variables" as vars;
 @use "src/app/styles/nde-mixing" as mixing;
 
+/* reduce top margin of homepage container from 5rem */
+.home-page-container {
+  margin-top: 2rem !important;
+}
+
 /* do not add color overlay to homepage image */
 .custom-search-bar-container .background-overlay {
   display: none;
