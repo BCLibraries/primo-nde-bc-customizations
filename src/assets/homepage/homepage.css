@@ -6,9 +6,10 @@
   margin-top: 2rem !important;
 }
 
-/* do not add color overlay to homepage image */
+/* change color of homepage image overlay */
 .custom-search-bar-container .background-overlay {
-  display: none;
+  background-color: #b29d6c !important;
+  opacity: 0.5 !important;
 }
 
 /* improve header definition against background image */
@@ -195,7 +196,6 @@ nde-top-bar button.advanced-search-btn-home-page {
         padding: 2rem;
         background-color: var(--sys-inverse-on-surface);
         gap: 1.5rem;
-        min-width: 50%;
 
         @include mixing.respond-to('small', 'xsmall') {
           padding: 1rem;
@@ -251,12 +251,15 @@ nde-top-bar button.advanced-search-btn-home-page {
       }
 
       .about-image {
+        text-align: center;
+        min-width: 50%;
         img {
-          object-fit: contain;
+          object-fit: contain !important;
+          width: 100% !important;
 
           @media (max-width: 960px) {
             width: auto;
-            height: 100%;
+            height: auto;
           }
 
           @include mixing.respond-to('small', 'xsmall') {
