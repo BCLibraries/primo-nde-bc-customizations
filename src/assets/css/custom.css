@@ -199,7 +199,13 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 }
 
 /* --- Homepage styles --- */
-/* -- see ../homepage/homepage.css for landing page styles -- */
+/* -- see ../homepage/homepage.css for custom landing page styles -- */
+
+/* -- for landing page builder styles -- */
+/* hide bulleted list in about text */
+div.about-text div.help-sign-in-container {
+    display: none;
+}
 
 /* --- Virtual Browse styles --- */
 
