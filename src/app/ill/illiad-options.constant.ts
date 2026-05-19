@@ -17,5 +17,5 @@ export const illiadOptions = {
   ],
   remoteScript: 'https://library.bc.edu/illiad-api/illiad.php',
   boxTitle: 'Interlibrary Loan',
-  illiadURL: 'https://illiad.bc.edu/illiad/BXM/illiad.dll',
+  illiadURL: 'https://illiad.bc.edu/illiad/',
 };
