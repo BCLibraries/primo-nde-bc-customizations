@@ -1,3 +1,5 @@
+// This component updates the placeholder text in the main search bar based on the selected tab in the search dropdown. It uses a MutationObserver to detect when Primo dynamically updates the dropdown selection and updates the placeholder text accordingly.
+
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 
 @Component({

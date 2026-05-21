@@ -1,3 +1,5 @@
+//  This component adds logo text after the library logo in the header.
+
 import { Component } from '@angular/core';
 import { AssetsPublicPathDirective } from "../services/assets-public-path.directive";
 

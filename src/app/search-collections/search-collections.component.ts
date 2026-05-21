@@ -1,3 +1,5 @@
+// This component replaces the default collection search, which is limited to the current collection, excluding children. It renders a button that links to the advanced search page with the Featured Collections scope selected, which allows users to search across all collections.
+
 import { Component, inject, Signal, computed } from '@angular/core';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';

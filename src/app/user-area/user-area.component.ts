@@ -1,3 +1,5 @@
+// This component detects the user menu in the top right of Primo VE, which displays the user's initials, and swaps the order of the initials. It uses polling to check for the presence of the user menu, since Primo VE renders it asynchronously and there isn't a reliable event to hook into.
+
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 

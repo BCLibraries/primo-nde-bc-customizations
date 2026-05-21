@@ -1,3 +1,5 @@
+// This component detects when an availability line contains "offsite" and strips the call number from the line, as well as from the aria-label on the parent button. It uses a MutationObserver to detect when Primo dynamically updates or re-renders the availability line, and re-applies the stripping as needed.
+
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 
 @Component({

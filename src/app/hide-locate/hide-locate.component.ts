@@ -1,3 +1,5 @@
+// This component hides the Locate button for O'Neill holdings that contain "newspaper" in the call number or are in classes A-D (fifth floor).
+
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 
 @Component({

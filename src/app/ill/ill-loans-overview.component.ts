@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// This component displays an overview of a user's ILL loans and requests, using data retrieved from the ILLiad system. It checks the user's group against a whitelist to determine if they are permitted to view the data.
+
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { IllService } from '../services/ill-service';
 import { IllUserService } from '../services/ill-user-service';

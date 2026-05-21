@@ -1,3 +1,5 @@
+// This component checks the user's group and displays a message about proxy borrowing eligibility, if applicable.
+
 import { Component, inject, Signal, computed } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
