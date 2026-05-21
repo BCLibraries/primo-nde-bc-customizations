@@ -20,3 +20,25 @@ height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;`;
   doc.body.insertBefore(noscript, doc.body.firstChild);
 }
 addGTM(document);
+
+/* Hide chat widget on the home page */
+function updateChatWidgetStyle() {
+  const styleId = "hide-chat-widget-style";
+  let styleEl = document.getElementById(styleId);
+
+  if (window.location.href.includes("/nde/home")) {
+    if (!styleEl) {
+      styleEl = document.createElement("style");
+      styleEl.id = styleId;
+      styleEl.innerHTML = ".lh3-chat-widget { display: none !important; }";
+      document.head.appendChild(styleEl);
+    }
+  } else {
+    if (styleEl) {
+      styleEl.remove();
+    }
+  }
+}
+
+// Check periodically since Primo is a Single Page Application (SPA) where the URL changes dynamically
+setInterval(updateChatWidgetStyle, 500);
