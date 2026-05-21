@@ -64,6 +64,14 @@ header.top-bar {
   background-color: #fff !important;
 }
 
+/* swaps order of user initials */
+.user-area .user-area-logged-in span {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  display: inline-block !important;
+  line-height: 24px;
+}
+
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
@@ -209,7 +217,7 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 /* -- for landing page builder styles -- */
 /* hide bulleted list in about text */
 div.about-text div.help-sign-in-container {
-    display: none;
+  display: none;
 }
 
 /* --- Virtual Browse styles --- */

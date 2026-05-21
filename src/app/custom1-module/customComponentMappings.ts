@@ -4,14 +4,11 @@ import { HathiTrustComponent } from '../hathi-trust/hathi-trust.component';
 import { SearchCollectionsComponent } from '../search-collections/search-collections.component';
 import { LinksFilterComponent } from '../links-filter/links-filter.component';
 import { RequestServicesComponent } from '../request-services/request-services.component';
-import { UserAreaComponent } from '../user-area/user-area.component';
 import { FindingAidsComponent } from '../finding-aids/finding-aids.component';
 import { OffsiteAvailabilityComponent } from '../offsite-availability/offsite-availability.component';
-import { HideLocateComponent } from '../hide-locate/hide-locate.component';
 import { InstitutionalLoginComponent } from '../institutional-login/institutional-login.component';
 import { RequestCardComponent } from '../request-card/request-card.component';
 import { JournalsCategoriesComponent } from '../journals-categories/journals-categories.component';
-//  import { ReportProblemComponent } from '../report-problem/report-problem.component';
 import { IllLoansOverviewComponent } from '../ill/ill-loans-overview.component';
 import { LibraryLogoComponent } from '../library-logo/library-logo.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
@@ -24,14 +21,11 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-collection-discovery-search-bar', SearchCollectionsComponent],
   ['nde-full-display-links-after', LinksFilterComponent],
   ['nde-location-after', RequestServicesComponent],
-  ['nde-user-area-after', UserAreaComponent],
   ['nde-online-availability-top', FindingAidsComponent],
   ['nde-physical-availability-line-after', OffsiteAvailabilityComponent],
-  ['nde-location-before', HideLocateComponent],
   ['nde-view-it-section-after', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
   ['nde-categories-before', JournalsCategoriesComponent],
-  //  ['nde-report-a-problem-before', ReportProblemComponent],
   ['nde-requests-page-after', IllLoansOverviewComponent],
   ['nde-account-overview-bottom', IllLoansOverviewComponent],
   ['nde-logo-after', LibraryLogoComponent],
