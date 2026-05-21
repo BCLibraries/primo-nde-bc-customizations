@@ -1,3 +1,5 @@
+// This component replaces the default "Report a Problem" icon in Primo with a custom question mark icon. It uses a MutationObserver to detect when Primo renders the button dynamically and replaces the icon accordingly.
+
 import {
   AfterViewInit,
   Component,

@@ -1,3 +1,5 @@
+// This component replaces the default Primo "no results" message with a custom message and additional links to other search options.
+
 import { CommonModule } from '@angular/common';
 import {
   Component,

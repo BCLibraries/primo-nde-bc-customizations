@@ -1,3 +1,5 @@
+// This component extracts finding aid links from the lds08 field and displays them as buttons in the brief record.
+
 import {
   Component,
   ElementRef,

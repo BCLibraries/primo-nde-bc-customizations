@@ -1,3 +1,5 @@
+// This component displays a link to Browzine above the categories column on the Journal Search page.
+
 import { Component } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
 

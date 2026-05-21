@@ -1,3 +1,5 @@
+// This service provides methods for finding full text links in HathiTrust.
+
 import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import {

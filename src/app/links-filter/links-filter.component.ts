@@ -1,3 +1,5 @@
+// This component filters out all links from the full display unless their text matches a target list.
+
 import { DOCUMENT } from '@angular/common';
 import {
   Component,

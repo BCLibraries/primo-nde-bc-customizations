@@ -1,3 +1,5 @@
+// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it displays a redirect to log in that renders in the same tab. Once logged in, the GES for the service will be displayed and the full teext availability will be hidden.
+
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, Subscription } from 'rxjs';

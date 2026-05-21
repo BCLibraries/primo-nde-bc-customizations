@@ -1,3 +1,5 @@
+// This component detects the request buttons on the full display and applies custom styling to them.
+
 import {
   Component,
   AfterViewInit,

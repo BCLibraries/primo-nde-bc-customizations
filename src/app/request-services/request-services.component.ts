@@ -1,3 +1,5 @@
+// This component detects when item-level request buttons are present on the full record display and applies custom styling to the help text about item-level requests. It also ensures that all location accordions are expanded so that the buttons are visible. It uses polling to check for the presence of the buttons, since Primo VE renders them asynchronously and there isn't a reliable event to hook into.
+
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
