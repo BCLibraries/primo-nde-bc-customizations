@@ -72,6 +72,12 @@ header.top-bar {
   line-height: 24px;
 }
 
+/* --- Search Bar styles --- */
+/* increase right margin to separate from Advanced Search button */
+.search-bar-container .search-bar-wrapper {
+  margin-inline-end: 40px !important;
+}
+
 /* --- Resource Recommender styles --- */
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
@@ -215,9 +221,76 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 /* -- see ../homepage/homepage.css for custom landing page styles -- */
 
 /* -- for landing page builder styles -- */
-/* hide bulleted list in about text */
-div.about-text div.help-sign-in-container {
-  display: none;
+/* reduce top margin of homepage container from 5rem */
+.home-page-container {
+  margin-top: 2rem !important;
+}
+
+/* change color of homepage image overlay */
+.custom-search-bar-container .background-overlay {
+  background-color: #b29d6c !important;
+  opacity: 0.5 !important;
+}
+
+/* improve header definition against background image */
+.custom-search-bar-container h1,
+.custom-search-bar-container h2 {
+  text-shadow: 2px 2px 2px #313131;
+}
+
+/* ask anything and adv search visible buttons */
+nde-top-bar button.advanced-search-btn-home-page {
+  background-color: var(
+    --mdc-filled-button-container-color,
+    var(--mat-sys-primary)
+  );
+}
+
+.main-landing-page {
+  gap: 1rem;
+}
+
+.about {
+  padding: none !important;
+  .about-content {
+    overflow: hidden;
+    @media (max-width: 980px) {
+      flex-direction: column !important;
+    }
+  }
+
+  .about-text {
+    /* hide bulleted list in about text */
+    .help-sign-in-container {
+      display: none;
+    }
+
+    /* don't resize about text by screen size */
+
+    .about-text-description {
+      font-size: 1rem !important;
+      line-height: 1.4rem !important;
+    }
+  }
+
+  .about-content {
+    gap: 40px;
+
+    .about-image {
+      text-align: center;
+      min-width: 50%;
+      img {
+        object-fit: contain !important;
+        width: 100% !important;
+        box-shadow: none !important;
+
+        @media (max-width: 980px) {
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+  }
 }
 
 /* --- Virtual Browse styles --- */
