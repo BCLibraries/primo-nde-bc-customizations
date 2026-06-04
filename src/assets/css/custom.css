@@ -1,3 +1,6 @@
+@import "bc-footer.css";
+@import "google-fonts.css";
+
 /* --- General styles --- */
 
 @font-face {
@@ -230,8 +233,8 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 
 /* change color of homepage image overlay */
 .custom-search-bar-container .background-overlay {
-  background-color: #b29d6c !important;
-  opacity: 0.5 !important;
+  background-color: #685c53 !important;
+  opacity: 0.6 !important;
 }
 
 /* improve header definition against background image */
@@ -242,9 +245,10 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
 
 /* ask anything and adv search visible buttons */
 nde-top-bar button.advanced-search-btn-home-page {
-  background-color: var(
+/*  background-color: var(
     --mdc-filled-button-container-color,
-    var(--mat-sys-primary)
+    var(--mat-sys-primary) */
+	outline: none !important;
   );
 }
 
