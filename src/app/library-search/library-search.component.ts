@@ -48,7 +48,7 @@ export class LibrarySearchComponent implements OnInit {
         if (hasNoQuery && isLibrarySearch) {
           setTimeout(() => {
             const advancedSearchBtn = document.querySelector(
-              'button.advanced-search-button',
+              '[data-qa="advanced_search_button"]',
             ) as HTMLButtonElement | null;
             if (advancedSearchBtn) {
               advancedSearchBtn.click();
