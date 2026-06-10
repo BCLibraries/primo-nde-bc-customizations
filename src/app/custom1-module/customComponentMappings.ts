@@ -13,6 +13,7 @@ import { IllLoansOverviewComponent } from '../ill/ill-loans-overview.component';
 import { LibraryLogoComponent } from '../library-logo/library-logo.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { LibrarySearchComponent } from '../library-search/library-search.component';
+import { LibMapsIntegrationComponent } from '../lib-maps-integration/lib-maps-integration.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -32,4 +33,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-logo-after', LibraryLogoComponent],
   ['nde-search-bar-presenter-top', SearchBarComponent],
   ['nde-search-bar-presenter-after', LibrarySearchComponent],
+  ['nde-full-display-service-container-top', LibMapsIntegrationComponent],
 ]);
