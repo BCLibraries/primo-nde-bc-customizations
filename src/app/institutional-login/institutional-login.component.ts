@@ -1,4 +1,4 @@
-// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it displays a redirect to log in that renders in the same tab. Once logged in, the GES for the service will be displayed and the full teext availability will be hidden.
+// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it displays a redirect to log in that renders in the same tab. Once logged in, the GES for the service will be displayed and the full text availability will be hidden.
 
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -37,10 +37,34 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
 
   private handleDocumentClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    const button = target.closest('button.view-it-card-no-license-container');
+
+    // In updated NDE versions, the element might be an anchor tag or have a different structure.
+    const actionElement = target.closest(
+      '.view-it-card-no-license-container, button, a',
+    );
+
+    if (!actionElement) return;
 
     // Use toLowerCase() and includes() to be immune to weird spacing or casing in Prod
-    if (button && button.textContent?.toLowerCase().includes('sign in')) {
+    const textContent = actionElement.textContent?.toLowerCase() || '';
+    const isSignInOrLogIn =
+      textContent.includes('sign in') || textContent.includes('log in');
+    const isTargetPackage = TARGET_PACKAGES.some((pkg) =>
+      textContent.includes(pkg.toLowerCase()),
+    );
+
+    const isMatch =
+      target.closest('.view-it-card-no-license-container') ||
+      (target.closest('nde-view-it-section') &&
+        (isSignInOrLogIn || isTargetPackage));
+
+    if (isMatch) {
+      // If it's a native anchor link, change the target to open in the same tab natively
+      const anchor = target.closest('a');
+      if (anchor && anchor.target === '_blank') {
+        anchor.target = '_self';
+      }
+
       // Guard against multiple component instances overriding the global methods concurrently
       if ((window as any)._isSignInPatched) return;
       (window as any)._isSignInPatched = true;

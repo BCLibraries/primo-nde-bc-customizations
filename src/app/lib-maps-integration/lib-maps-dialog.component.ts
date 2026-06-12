@@ -61,7 +61,7 @@ export interface LibMapsDialogData {
         display: flex;
         flex-direction: column;
         flex: 1;
-        padding: 0 24px 24px 24px;
+        padding: 0 8px 8px 8px;
         overflow: hidden;
       }
       .brief-record-info {
