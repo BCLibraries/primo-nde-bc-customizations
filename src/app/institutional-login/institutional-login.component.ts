@@ -1,4 +1,4 @@
-// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it displays a redirect to log in that renders in the same tab. Once logged in, the GES for the service will be displayed and the full text availability will be hidden.
+// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it binds the user sign-in button to the service hyperlink. This causes the user to log in to see the GES with credential information and the full text availability will be hidden.
 
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -59,64 +59,43 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
         (isSignInOrLogIn || isTargetPackage));
 
     if (isMatch) {
-      // If it's a native anchor link, change the target to open in the same tab natively
-      const anchor = target.closest('a');
-      if (anchor && anchor.target === '_blank') {
-        anchor.target = '_self';
+      event.preventDefault();
+      event.stopPropagation();
+
+      const triggerSignIn = () => {
+        // Using the data-mat-icon-name="Login" attribute ignores language, spacing, or case issues!
+        const loginIcon = document.querySelector(
+          'mat-icon[data-mat-icon-name="Login"]',
+        );
+        const signInBtn = (loginIcon?.closest('button') ||
+          document.querySelector(
+            'button[aria-label*="Sign in" i]',
+          )) as HTMLElement;
+
+        if (signInBtn) {
+          signInBtn.click();
+        } else {
+          console.warn('Could not find the native Primo Sign In button.');
+          // Fallback: If they are already logged in (no sign in button) or it fails, just navigate normally
+          const anchor = target.closest('a');
+          if (anchor && anchor.href) {
+            window.location.href = anchor.href;
+          }
+        }
+      };
+
+      // Angular Material menus aren't in the DOM until opened.
+      if (document.querySelector('mat-icon[data-mat-icon-name="Login"]')) {
+        triggerSignIn();
+      } else {
+        const userMenuBtn = document.getElementById(
+          'user-area-button',
+        ) as HTMLElement;
+        if (userMenuBtn) {
+          userMenuBtn.click();
+          setTimeout(triggerSignIn, 100);
+        }
       }
-
-      // Guard against multiple component instances overriding the global methods concurrently
-      if ((window as any)._isSignInPatched) return;
-      (window as any)._isSignInPatched = true;
-
-      const originalOpen = window.open;
-      const originalCreateElement = document.createElement;
-
-      let timeoutId: ReturnType<typeof setTimeout>;
-
-      const restoreOriginals = () => {
-        if (window.open !== originalOpen) window.open = originalOpen;
-        if (document.createElement !== originalCreateElement)
-          document.createElement = originalCreateElement;
-        (window as any)._isSignInPatched = false;
-        clearTimeout(timeoutId);
-      };
-
-      window.open = function (
-        url?: string | URL,
-        targetName?: string,
-        features?: string,
-      ) {
-        if (url) {
-          window.location.href = url.toString();
-        }
-        restoreOriginals();
-        return null;
-      };
-
-      // Temporarily override document.createElement to catch dynamically created <a> tags
-      document.createElement = function (
-        tagName: string,
-        options?: ElementCreationOptions,
-      ) {
-        const el = originalCreateElement.call(document, tagName, options);
-        if (tagName.toLowerCase() === 'a') {
-          const originalClick = el.click;
-          el.click = function () {
-            const anchor = el as HTMLAnchorElement;
-            if (anchor.href) {
-              window.location.href = anchor.href;
-              restoreOriginals();
-              return;
-            }
-            return originalClick.apply(this, arguments as any);
-          };
-        }
-        return el;
-      } as typeof document.createElement;
-
-      // Increase timeout to 10 seconds for safety
-      timeoutId = setTimeout(restoreOriginals, 10000);
     }
   };
 
