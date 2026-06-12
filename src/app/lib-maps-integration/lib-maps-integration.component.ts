@@ -127,9 +127,9 @@ export class LibMapsIntegrationComponent implements OnInit, OnDestroy {
       );
 
       this.dialog.open(LibMapsDialogComponent, {
-        width: '80vw',
+        width: '90vw',
         maxWidth: '90vw',
-        height: '80vh', // Sets height to ensure the iframe takes up substantial screen real estate
+        height: '90vh', // Sets height to ensure the iframe takes up substantial screen real estate
         maxHeight: '90vh',
         data: {
           mapUrl: match.stackMapUrl,

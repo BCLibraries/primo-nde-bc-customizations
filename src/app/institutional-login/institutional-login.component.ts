@@ -1,4 +1,4 @@
-// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it displays a redirect to log in that renders in the same tab. Once logged in, the GES for the service will be displayed and the full teext availability will be hidden.
+// This component detects if the current record has an electronic service that matches a target list of institutional login packages. If so, it binds the user sign-in button to the service hyperlink. This causes the user to log in to see the GES with credential information and the full text availability will be hidden.
 
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -37,62 +37,65 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
 
   private handleDocumentClick = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    const button = target.closest('button.view-it-card-no-license-container');
+
+    // In updated NDE versions, the element might be an anchor tag or have a different structure.
+    const actionElement = target.closest(
+      '.view-it-card-no-license-container, button, a',
+    );
+
+    if (!actionElement) return;
 
     // Use toLowerCase() and includes() to be immune to weird spacing or casing in Prod
-    if (button && button.textContent?.toLowerCase().includes('sign in')) {
-      // Guard against multiple component instances overriding the global methods concurrently
-      if ((window as any)._isSignInPatched) return;
-      (window as any)._isSignInPatched = true;
+    const textContent = actionElement.textContent?.toLowerCase() || '';
+    const isSignInOrLogIn =
+      textContent.includes('sign in') || textContent.includes('log in');
+    const isTargetPackage = TARGET_PACKAGES.some((pkg) =>
+      textContent.includes(pkg.toLowerCase()),
+    );
 
-      const originalOpen = window.open;
-      const originalCreateElement = document.createElement;
+    const isMatch =
+      target.closest('.view-it-card-no-license-container') ||
+      (target.closest('nde-view-it-section') &&
+        (isSignInOrLogIn || isTargetPackage));
 
-      let timeoutId: ReturnType<typeof setTimeout>;
+    if (isMatch) {
+      event.preventDefault();
+      event.stopPropagation();
 
-      const restoreOriginals = () => {
-        if (window.open !== originalOpen) window.open = originalOpen;
-        if (document.createElement !== originalCreateElement)
-          document.createElement = originalCreateElement;
-        (window as any)._isSignInPatched = false;
-        clearTimeout(timeoutId);
+      const triggerSignIn = () => {
+        // Using the data-mat-icon-name="Login" attribute ignores language, spacing, or case issues!
+        const loginIcon = document.querySelector(
+          'mat-icon[data-mat-icon-name="Login"]',
+        );
+        const signInBtn = (loginIcon?.closest('button') ||
+          document.querySelector(
+            'button[aria-label*="Sign in" i]',
+          )) as HTMLElement;
+
+        if (signInBtn) {
+          signInBtn.click();
+        } else {
+          console.warn('Could not find the native Primo Sign In button.');
+          // Fallback: If they are already logged in (no sign in button) or it fails, just navigate normally
+          const anchor = target.closest('a');
+          if (anchor && anchor.href) {
+            window.location.href = anchor.href;
+          }
+        }
       };
 
-      window.open = function (
-        url?: string | URL,
-        targetName?: string,
-        features?: string,
-      ) {
-        if (url) {
-          window.location.href = url.toString();
+      // Angular Material menus aren't in the DOM until opened.
+      if (document.querySelector('mat-icon[data-mat-icon-name="Login"]')) {
+        triggerSignIn();
+      } else {
+        const userMenuBtn = document.getElementById(
+          'user-area-button',
+        ) as HTMLElement;
+        if (userMenuBtn) {
+          userMenuBtn.click();
+          setTimeout(triggerSignIn, 100);
         }
-        restoreOriginals();
-        return null;
-      };
-
-      // Temporarily override document.createElement to catch dynamically created <a> tags
-      document.createElement = function (
-        tagName: string,
-        options?: ElementCreationOptions,
-      ) {
-        const el = originalCreateElement.call(document, tagName, options);
-        if (tagName.toLowerCase() === 'a') {
-          const originalClick = el.click;
-          el.click = function () {
-            const anchor = el as HTMLAnchorElement;
-            if (anchor.href) {
-              window.location.href = anchor.href;
-              restoreOriginals();
-              return;
-            }
-            return originalClick.apply(this, arguments as any);
-          };
-        }
-        return el;
-      } as typeof document.createElement;
-
-      // Increase timeout to 10 seconds for safety
-      timeoutId = setTimeout(restoreOriginals, 10000);
+      }
     }
   };
 
