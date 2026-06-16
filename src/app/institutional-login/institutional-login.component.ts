@@ -56,7 +56,7 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
     const isMatch =
       target.closest('.view-it-card-no-license-container') ||
       (target.closest('nde-view-it-section') &&
-        (isSignInOrLogIn));
+        (isSignInOrLogIn && !isTargetPackage));
 
     if (isMatch) {
       event.preventDefault();
