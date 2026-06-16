@@ -83,6 +83,10 @@ header.top-bar {
 
 /* --- Resource Recommender styles --- */
 
+cdk-virtual-scroll-viewport {
+  --resource-recommender-viewport-height: 169px !important;
+}
+
 .carousel-resource-recommender-card mat-card-content .resource-img {
   object-fit: contain !important;
   padding: 0.5rem;
