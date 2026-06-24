@@ -56,7 +56,8 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
     const isMatch =
       target.closest('.view-it-card-no-license-container') ||
       (target.closest('nde-view-it-section') &&
-        (isSignInOrLogIn && !isTargetPackage));
+        isSignInOrLogIn &&
+        !isTargetPackage);
 
     if (isMatch) {
       event.preventDefault();
@@ -141,7 +142,7 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
             );
 
             if (hasMatch) {
-              this.hideViewItSection();
+              this.hideSignInLinks();
               this.setupObserver();
             } else {
               this.disconnectObserver();
@@ -172,7 +173,7 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
       this.el.nativeElement.parentElement ||
       document.body;
     this.observer = new MutationObserver(() => {
-      this.hideViewItSection();
+      this.hideSignInLinks();
     });
 
     this.observer.observe(parent, {
@@ -189,22 +190,32 @@ export class InstitutionalLoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  private hideViewItSection(): void {
+  private hideSignInLinks(): void {
     const current = this.el.nativeElement as HTMLElement;
 
-    // Search for the nde-view-it-section globally within the parent full display container to be safe
     const container =
       current?.closest('nde-full-display-container') || current?.parentElement;
     if (!container) return;
 
-    const viewItSections = container.querySelectorAll('nde-view-it-section');
-    viewItSections.forEach((section: Element) => {
-      const htmlSection = section as HTMLElement;
+    const actionElements = container.querySelectorAll(
+      'nde-view-it-section a, nde-view-it-section button, nde-view-it-section .view-it-card-no-license-container',
+    );
+
+    actionElements.forEach((element: Element) => {
+      const htmlElement = element as HTMLElement;
+      const textContent = htmlElement.textContent?.toLowerCase() || '';
+      const isSignInOrLogIn =
+        textContent.includes('sign in') || textContent.includes('log in');
+      const isTargetPackage = TARGET_PACKAGES.some((pkg) =>
+        textContent.includes(pkg.toLowerCase()),
+      );
+
       if (
-        htmlSection.style.display !== 'none' &&
-        htmlSection.textContent?.includes('Full text availability')
+        htmlElement.style.display !== 'none' &&
+        isSignInOrLogIn &&
+        !isTargetPackage
       ) {
-        htmlSection.style.display = 'none';
+        htmlElement.style.display = 'none';
       }
     });
   }
