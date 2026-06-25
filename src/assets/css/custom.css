@@ -12,12 +12,6 @@
     format("woff2");
 }
 
-nde-logo {
-  flex: none !important;
-  height: 35px;
-  width: auto;
-}
-
 /* display the advanced search query summary on mobile when it is hidden by default */
 @media only screen and (max-width: 599.98px) {
   .search-summary .searched-for-container {
@@ -40,6 +34,21 @@ a {
 }
 
 /* --- Header styles --- */
+
+nde-logo {
+  flex: none !important;
+  height: 35px;
+  width: auto;
+}
+
+/* Move logo text to end of flex row on mobile because the menu jumps to the start */
+/* Cannot add to library-logo component because this affects the entire component element */
+
+@media only screen and (max-width: 599.98px) {
+  ng-component:has(nde-logo-after-from-remote-0) {
+    order: 2;
+  }
+}
 
 header.top-bar {
   background: #8a100b !important;
