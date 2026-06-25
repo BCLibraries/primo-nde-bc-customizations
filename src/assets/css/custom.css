@@ -71,6 +71,42 @@ header.top-bar {
   }
 }
 
+/* Replace the QR code icon with a share icon */
+/* Target the specific mat-icon component */
+mat-icon[data-mat-icon-name="QR"] {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 24px;  /* Ensure explicit base sizing */
+  height: 24px;
+}
+
+/* Hide the native Angular template QR SVG */
+mat-icon[data-mat-icon-name="QR"] svg {
+  display: none !important;
+}
+
+/* Inject the functional, percent-encoded Share vector graphic */
+mat-icon[data-mat-icon-name="QR"]::before {
+  content: "";
+  display: block;
+  width: 24px;   /* Lock the dimensions to match standard icons */
+  height: 24px;
+  background-color: currentColor; /* Matches active color/primary states */
+  
+  /* Fixed: Characters are fully encoded (%23 replaces # and %2D replaces -) */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 %2D960 960 960' width='100%25' height='100%25'%3E%3Cpath d='M680%2D80q%2D50 0%2D85%2D35t%2D35%2D85q0%2D6 3%2D28L282%2D392q%2D16 15%2D37 23.5t%2D45 8.5q%2D50 0%2D85%2D35t%2D35%2D85q0%2D50 35%2D85t85%2D35q24 0 45 8.5t37 23.5l281%2D164q%2D2%2D7%2D2.5%2D13.5T560%2D760q0%2D50 35%2D85t85%2D35q50 0 85 35t35 85q0 50%2D35 85t%2D85 35q%2D24 0%2D45%2D8.5T598%2D672L317%2D508q2 7 2.5 13.5t.5 14.5q0 8%2D.5 14.5T317%2D452l281 164q16%2D15 37%2D23.5t45%2D8.5q50 0 85 35t35 85q0 50%2D35 85t%2D85 35Zm0%2D80q17 0 28.5%2D11.5T720%2D200q0%2D17%2D11.5%2D28.5T680%2D240q%2D17 0%2D28.5 11.5T640%2D200q0 17 11.5 28.5T680%2D160ZM200%2D440q17 0 28.5%2D11.5T240%2D480q0%2D17%2D11.5%2D28.5T200%2D520q%2D17 0%2D28.5 11.5T160%2D480q0 17 11.5 28.5T200%2D440Zm480%2D280q17 0 28.5%2D11.5T720%2D760q0%2D17%2D11.5%2D28.5T680%2D800q%2D17 0%2D28.5 11.5T640%2D760q0 17 11.5 28.5T680%2D720Zm0 520ZM200%2D480Zm480%2D280Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 %2D960 960 960' width='100%25' height='100%25'%3E%3Cpath d='M680%2D80q%2D50 0%2D85%2D35t%2D35%2D85q0%2D6 3%2D28L282%2D392q%2D16 15%2D37 23.5t%2D45 8.5q%2D50 0%2D85%2D35t%2D35%2D85q0%2D50 35%2D85t85%2D35q24 0 45 8.5t37 23.5l281%2D164q%2D2%2D7%2D2.5%2D13.5T560%2D760q0%2D50 35%2D85t85%2D35q50 0 85 35t35 85q0 50%2D35 85t%2D85 35q%2D24 0%2D45%2D8.5T598%2D672L317%2D508q2 7 2.5 13.5t.5 14.5q0 8%2D.5 14.5T317%2D452l281 164q16%2D15 37%2D23.5t45%2D8.5q50 0 85 35t35 85q0 50%2D35 85t%2D85 35Zm0%2D80q17 0 28.5%2D11.5T720%2D200q0%2D17%2D11.5%2D28.5T680%2D240q%2D17 0%2D28.5 11.5T640%2D200q0 17 11.5 28.5T680%2D160ZM200%2D440q17 0 28.5%2D11.5T240%2D480q0%2D17%2D11.5%2D28.5T200%2D520q%2D17 0%2D28.5 11.5T160%2D480q0 17 11.5 28.5T200%2D440Zm480%2D280q17 0 28.5%2D11.5T720%2D760q0%2D17%2D11.5%2D28.5T680%2D800q%2D17 0%2D28.5 11.5T640%2D760q0 17 11.5 28.5T680%2D720Zm0 520ZM200%2D480Zm480%2D280Z'/%3E%3C/svg%3E");
+  
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
 #user-area-button > span:not(:empty) {
   color: var(--sys-primary) !important;
   background-color: #fff !important;
