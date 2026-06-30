@@ -357,6 +357,10 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
 
 /* -- User Account styles --- */
 
+.account-menu-container {
+  padding-block-end: 1.25rem;
+}
+
 nde-personal-settings mat-card-actions {
   display: none !important;
 }
