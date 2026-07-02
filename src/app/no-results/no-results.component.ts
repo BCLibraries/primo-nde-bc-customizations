@@ -25,6 +25,7 @@ interface CustomRouterState {
         search_scope?: string;
         tab?: string;
         vid?: string;
+        mode?: string;
         pcAvailability?: string;
         [key: string]: any;
       };
@@ -58,6 +59,11 @@ const selectSearchView = createSelector(
   (router) => router?.state?.root?.queryParams?.vid,
 );
 
+const selectSearchMode = createSelector(
+  selectRouterState,
+  (router) => router?.state?.root?.queryParams?.mode,
+);
+
 const selectSearchExpanded = createSelector(
   selectRouterState,
   (router) => router?.state?.root?.queryParams?.pcAvailability,
@@ -88,6 +94,9 @@ export class NoResultsComponent implements AfterViewInit, OnDestroy {
   searchView: Signal<string | undefined> =
     this.store.selectSignal(selectSearchView);
 
+  searchMode: Signal<string | undefined> =
+    this.store.selectSignal(selectSearchMode);
+
   searchExpanded: Signal<string | undefined> =
     this.store.selectSignal(selectSearchExpanded);
 
@@ -111,6 +120,7 @@ export class NoResultsComponent implements AfterViewInit, OnDestroy {
   isBooks = computed(() => this.searchScope() === 'MyInstitution');
   isCDI = computed(() => this.searchScope() === 'CentralIndex');
   isEverything = computed(() => this.searchScope() === 'MyInst_and_CI');
+  isAdvancedSearch = computed(() => this.searchMode() === 'advanced');
   isNotExpanded = computed(() => this.searchExpanded() !== 'true');
   isShortSearchTerm = computed(() => {
     const t = this.searchTerm();
