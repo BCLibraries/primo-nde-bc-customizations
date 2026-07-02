@@ -17,7 +17,14 @@
     <!-- display: inline -->
     <li class="ng-star-inserted"
       >Didn't find what you were looking for?
-      <a [href]="getWorldCatUrl()" target="_blank" rel="noopener noreferrer"
+      <a
+        [href]="
+          isAdvancedSearch()
+            ? 'https://bc.on.worldcat.org/discovery'
+            : getWorldCatUrl()
+        "
+        target="_blank"
+        rel="noopener noreferrer"
         >Try your search in WorldCat</a
       >.
     </li>
