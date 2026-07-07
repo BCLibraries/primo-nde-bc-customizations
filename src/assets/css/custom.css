@@ -19,6 +19,16 @@
   }
 }
 
+/* make footer "sticky" so it displays at the bottom of the page even when there is little content */
+main.sub-container {
+  display: flex;
+  flex-direction: column;
+
+  nde-footer {
+    margin-top: auto;
+  }
+}
+
 /* --- Colors --- */
 
 :root {
