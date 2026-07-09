@@ -1,8 +1,8 @@
-// This component monitors the DOM for the presence of a ViewIt (Find Online) section and, when found, makes the LibKey Find Online button visible. It uses a MutationObserver to watch for changes in the DOM. (That button is hidden by default in custom.css, so it will only be shown when the ViewIt section is present.)
+// This component monitors the nde-record-availability element for the presence of a hidden Find Online button. When none is found, it hides the LibKey Find Online button. It uses a MutationObserver to watch for changes in the DOM.
 
 // This is necessary because the LibKey add-on hides the online availability section in the brief display and instead incorporates the Find Online button into its stack of services. This becomes a problem when a physical-only title triggers LibKey by ISSN.
 
-import { AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'custom-libkey-availability',
@@ -14,16 +14,35 @@ import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 export class LibkeyAvailabilityComponent implements AfterViewInit, OnDestroy {
   private observer: MutationObserver | undefined;
 
+  constructor(private elementRef: ElementRef) {}
+
   ngAfterViewInit(): void {
+    const hostElement = this.elementRef.nativeElement;
+    const parentRecordAvailability = hostElement.closest(
+      'nde-record-availability',
+    );
+
+    if (!parentRecordAvailability) {
+      return;
+    }
+
     const checkForElement = () => {
-      const viewItElement = document.querySelector('div.service_viewit');
-      if (viewItElement) {
-        const stackedDropdown = document.querySelector(
-          'stacked-dropdown',
-        ) as HTMLElement;
-        if (stackedDropdown) {
-          stackedDropdown.style.display = 'block';
+      const onlineAvailability = parentRecordAvailability.querySelector(
+        'nde-online-availability[data-ti-online-availability-hidden-by-third-iron="1"]',
+      );
+
+      if (onlineAvailability) {
+        const hasButton = onlineAvailability.querySelector('button');
+
+        if (!hasButton) {
+          const stackedButton = parentRecordAvailability.querySelector(
+            'stacked-button > button',
+          ) as HTMLElement;
+          if (stackedButton) {
+            stackedButton.style.display = 'none';
+          }
         }
+
         // Once we've found the element and acted on it, we can stop observing.
         if (this.observer) {
           this.observer.disconnect();
@@ -40,7 +59,7 @@ export class LibkeyAvailabilityComponent implements AfterViewInit, OnDestroy {
 
     this.observer = new MutationObserver(() => checkForElement());
 
-    this.observer.observe(document.body, {
+    this.observer.observe(parentRecordAvailability, {
       childList: true,
       subtree: true,
     });

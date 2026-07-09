@@ -20,7 +20,7 @@ import { LibkeyAvailabilityComponent } from '../libkey-availability/libkey-avail
 export const selectorComponentMap = new Map<string, any>([
   ['nde-search-no-results-before', NoResultsComponent],
   ['nde-personal-details-view-after', ProxyBorrowerComponent],
-  ['nde-online-availability-top', HathiTrustComponent],
+  ['nde-online-availability-after', HathiTrustComponent],
   ['nde-collection-discovery-search-bar', SearchCollectionsComponent],
   ['nde-full-display-links-after', LinksFilterComponent],
   ['nde-location-after', RequestServicesComponent],
@@ -35,5 +35,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-search-bar-presenter-top', SearchBarComponent],
   ['nde-search-bar-presenter-after', LibrarySearchComponent],
   ['nde-full-display-service-container-top', LibMapsIntegrationComponent],
-  ['nde-online-availability-after', LibkeyAvailabilityComponent],
+  ['nde-record-availability-top', LibkeyAvailabilityComponent],
 ]);

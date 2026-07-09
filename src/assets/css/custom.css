@@ -384,13 +384,6 @@ nde-personal-settings mat-card-actions {
   margin-bottom: 2rem;
 }
 
-/* --- LibKey styles --- */
-
-/* Set stacked-dropdown button as hidden by default. LibkeyAvailability component will toggle visibility when a ViewIt (Find Online) section is available. */
-stacked-dropdown {
-  display: none;
-}
-
 /* --- LibMaps styles --- */
 
 .springy-button {
