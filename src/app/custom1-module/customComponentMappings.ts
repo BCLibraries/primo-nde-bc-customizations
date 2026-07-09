@@ -14,16 +14,17 @@ import { LibraryLogoComponent } from '../library-logo/library-logo.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { LibrarySearchComponent } from '../library-search/library-search.component';
 import { LibMapsIntegrationComponent } from '../lib-maps-integration/lib-maps-integration.component';
+import { LibkeyAvailabilityComponent } from '../libkey-availability/libkey-availability.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
   ['nde-search-no-results-before', NoResultsComponent],
   ['nde-personal-details-view-after', ProxyBorrowerComponent],
-  ['nde-online-availability-before', HathiTrustComponent],
+  ['nde-online-availability-top', HathiTrustComponent],
   ['nde-collection-discovery-search-bar', SearchCollectionsComponent],
   ['nde-full-display-links-after', LinksFilterComponent],
   ['nde-location-after', RequestServicesComponent],
-  ['nde-online-availability-top', FindingAidsComponent],
+  ['nde-online-availability-bottom', FindingAidsComponent],
   ['nde-physical-availability-line-after', OffsiteAvailabilityComponent],
   ['nde-view-it-section-after', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
@@ -34,4 +35,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-search-bar-presenter-top', SearchBarComponent],
   ['nde-search-bar-presenter-after', LibrarySearchComponent],
   ['nde-full-display-service-container-top', LibMapsIntegrationComponent],
+  ['nde-online-availability-after', LibkeyAvailabilityComponent],
 ]);
