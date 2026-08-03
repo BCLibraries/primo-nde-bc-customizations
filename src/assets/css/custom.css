@@ -186,6 +186,33 @@ nde-results-range#results-range {
   word-break: keep-all;
 }
 
+/* make resource types filter bar slightly more pronounced */
+nde-search-results-resource-type-bar .mdc-button {
+  color: var(
+    --mdc-text-button-label-text-color,
+    var(--mat-sys-primary)
+  ) !important;
+  font-weight: 500 !important;
+}
+
+nde-search-results-resource-type-bar .mdc-button.active-resource-type {
+  font-weight: 600 !important;
+}
+
+nde-search-results-resource-type-bar .resource-type-bar {
+  flex-grow: 1;
+}
+
+nde-search-results-resource-type-bar .resource-type-bar > .flex-row {
+  flex-grow: 1;
+  border-bottom: 1px solid var(--border);
+}
+
+nde-search-results-resource-type-bar .resource-type-bar button.show-more-btn {
+  margin-top: 1px;
+  border-bottom: 1px solid var(--border);
+}
+
 /* hide the ILL library facet */
 nde-filters-value:has(button[data-qa*="12900830001021"]) {
   display: none;
