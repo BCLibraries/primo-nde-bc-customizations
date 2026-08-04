@@ -402,10 +402,6 @@ nde-virtual-browse-card img[src*="icon_other.png"] {
   padding-block-end: 1.25rem;
 }
 
-nde-personal-settings mat-card-actions {
-  display: none !important;
-}
-
 /* leave gap between Alma requests and ILL requests card */
 .requests-table {
   margin-bottom: 2rem;
