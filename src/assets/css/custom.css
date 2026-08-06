@@ -143,8 +143,13 @@ mat-icon[data-mat-icon-name="QR"]::before {
 
 /* --- Resource Recommender styles --- */
 
-cdk-virtual-scroll-viewport {
+cdk-virtual-scroll-viewport.cdk-virtual-scroll-orientation-horizontal {
   --resource-recommender-viewport-height: 169px !important;
+}
+
+.carousel-card {
+  min-height: 50px !important;
+  max-height: 169px !important;
 }
 
 .carousel-resource-recommender-card mat-card-content .resource-img {
