@@ -39,6 +39,6 @@ export class SearchCollectionsComponent {
     encodeURIComponent(this.searchView() || ''),
   );
   getSearchUrl(): string {
-    return `/nde/home?vid=${this.encodedSearchView()}&tab=LibraryCatalog&search_scope=FEATURED&mode=advanced`;
+    return `/nde/home?vid=${this.encodedSearchView()}&tab=LibraryCatalog&search_scope=FEATURED&mode=LibrarySearch`;
   }
 }
