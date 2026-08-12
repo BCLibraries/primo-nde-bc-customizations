@@ -58,10 +58,18 @@ nde-logo {
 
 /* Move logo text to end of flex row on mobile because the menu jumps to the start */
 /* Cannot add to library-logo component because this affects the entire component element */
-
 @media only screen and (max-width: 599.98px) {
   ng-component:has(nde-logo-after-from-remote-0) {
     order: 2;
+  }
+}
+
+/* Limit the width of the header container on large screens */ 
+/* Accounts for August 2026 bug that displays too many items, causing viewport overrun */
+@media (min-width: 1449px) {
+  .header-container {
+    width: clamp(1450px, 75%, 1600px);
+    margin: 0 auto !important;
   }
 }
 
