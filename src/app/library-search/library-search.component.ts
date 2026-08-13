@@ -5,6 +5,8 @@
 import { Component, inject, OnInit, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store, createFeatureSelector, createSelector } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { isEqual } from 'lodash-es';
 
 interface CustomRouterState {
   state: {
@@ -12,6 +14,8 @@ interface CustomRouterState {
       queryParams: {
         query?: string;
         mode?: string;
+        tab?: string;
+        search_scope?: string;
         [key: string]: any;
       };
     };
@@ -38,14 +42,15 @@ export class LibrarySearchComponent implements OnInit {
   ngOnInit(): void {
     this.store
       .select(selectQueryParams)
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(distinctUntilChanged(isEqual), takeUntilDestroyed(this.destroyRef))
       .subscribe((params) => {
         if (!params) return;
 
         const hasNoQuery = !params['query'];
         const isLibrarySearch = params['mode'] === 'LibrarySearch';
+        const hasRequiredParams = params['tab'] && params['search_scope'];
 
-        if (hasNoQuery && isLibrarySearch) {
+        if (hasNoQuery && isLibrarySearch && hasRequiredParams) {
           setTimeout(() => {
             const advancedSearchBtn = document.querySelector(
               '[data-qa="advanced_search_button"]',
