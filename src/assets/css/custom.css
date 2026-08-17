@@ -29,6 +29,12 @@ main.sub-container {
   }
 }
 
+/* keep mobile main menu from extending beyond bottom of viewport on certain phones */
+.mat-mdc-dialog-inner-container {
+  max-height: 90vh !important;
+  overflow-y: scroll !important;
+}
+
 /* --- Colors --- */
 
 :root {
@@ -64,7 +70,7 @@ nde-logo {
   }
 }
 
-/* Limit the width of the header container on large screens */ 
+/* Limit the width of the header container on large screens */
 /* Accounts for August 2026 bug that displays too many items, causing viewport overrun */
 @media (min-width: 1449px) {
   .header-container {
