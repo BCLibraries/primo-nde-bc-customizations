@@ -32,18 +32,31 @@ export class LibkeyAvailabilityComponent implements AfterViewInit, OnDestroy {
       );
 
       if (onlineAvailability) {
-        const hasButton = onlineAvailability.querySelector('button');
+        const hasButton = onlineAvailability.querySelector('button, a');
 
         if (!hasButton) {
-          const stackedButton = parentRecordAvailability.querySelector(
+          const stackedButtons = parentRecordAvailability.querySelectorAll(
             'stacked-button > button',
-          ) as HTMLElement;
-          if (stackedButton) {
-            stackedButton.style.display = 'none';
+          );
+          if (stackedButtons.length > 0) {
+            stackedButtons.forEach((button: Element) => {
+              (button as HTMLElement).style.setProperty(
+                'display',
+                'none',
+                'important',
+              );
+            });
+            if (this.observer) {
+              this.observer.disconnect();
+            }
+            return true;
           }
+          // Third Iron marked online availability, but stacked-button > button
+          // has not been added to the DOM yet. Keep observing.
+          return false;
         }
 
-        // Once we've found the element and acted on it, we can stop observing.
+        // Online availability has a button/link, so LibKey button remains visible.
         if (this.observer) {
           this.observer.disconnect();
         }

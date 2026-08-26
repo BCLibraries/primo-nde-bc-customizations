@@ -26,7 +26,7 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-location-after', RequestServicesComponent],
   ['nde-online-availability-bottom', FindingAidsComponent],
   ['nde-physical-availability-line-after', OffsiteAvailabilityComponent],
-  ['nde-view-it-section-after', InstitutionalLoginComponent],
+  ['nde-view-it-section-before', InstitutionalLoginComponent],
   ['nde-request-card-top', RequestCardComponent],
   ['nde-categories-before', JournalsCategoriesComponent],
   ['nde-requests-page-after', IllLoansOverviewComponent],
