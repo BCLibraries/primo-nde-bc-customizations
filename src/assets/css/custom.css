@@ -359,9 +359,9 @@ div#syndetics_unbound {
   }
 }
 
-.unbound_lookinside_nav {
-    font-weight: 400 !important;
-  }
+#LT_LB_title {
+font-weight: 600 !important;
+}
 
 
 /* --- Homepage styles --- */
