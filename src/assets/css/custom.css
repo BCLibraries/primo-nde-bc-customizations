@@ -359,6 +359,11 @@ div#syndetics_unbound {
   }
 }
 
+.unbound_lookinside_nav {
+    font-weight: 400 !important;
+  }
+
+
 /* --- Homepage styles --- */
 /* -- see ../homepage/homepage.css for custom landing page styles, if in use -- */
 
