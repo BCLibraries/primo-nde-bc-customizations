@@ -72,7 +72,7 @@ describe('HathiTrustComponent', () => {
     const fixture = TestBed.createComponent(HathiTrustComponent);
     component = fixture.componentInstance;
     const text = await firstValueFrom(component.availabilityText$);
-    expect(text).toBe('Full text from HathiTrust');
+    expect(text).toBe('View at HathiTrust');
   });
 
   it('uses translated availability text when available', async () => {
