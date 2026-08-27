@@ -264,6 +264,14 @@ nde-record-snippet span {
   font-style: italic;
 }
 
+/* force line break before HathiTrust button */
+div.responsive-availability-layout:has(custom-hathi-trust-link) {
+  display: block !important;
+  custom-hathi-trust-link div {
+    margin-top: 0.5rem;
+  }
+}
+
 /* --- Facets styles --- */
 /* capitalize local display field facets */
 nde-filters-group#lds01 span.mdc-button__label {
@@ -328,6 +336,26 @@ nde-requests > nde-request-card > mat-card > mat-card-content {
       fill: #ffffff !important;
       stroke: #ffffff !important;
     }
+  }
+}
+
+/* Syndetics styles */
+
+div#syndetics_unbound {
+  .unbound_header {
+    font-size: larger;
+  }
+
+  b {
+    font-weight: 600;
+  }
+
+  p {
+    margin: 1rem 0 0 0;
+  }
+
+  li {
+    margin: 1rem;
   }
 }
 
