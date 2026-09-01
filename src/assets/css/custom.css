@@ -231,6 +231,15 @@ nde-search-results-resource-type-bar .resource-type-bar button.show-more-btn {
   border-bottom: 1px solid var(--border);
 }
 
+/* fix spacing and add question mark to "did you mean" suggestions */
+button#did-you-mean-no-results::after, a#did-you-mean::after {
+content: "?";
+}
+
+a#did-you-mean {
+padding-inline-start: 0 !important;
+}
+
 /* hide the ILL library facet */
 nde-filters-value:has(button[data-qa*="12900830001021"]) {
   display: none;
