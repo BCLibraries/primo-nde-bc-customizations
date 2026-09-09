@@ -40,11 +40,7 @@ export class LibkeyAvailabilityComponent implements AfterViewInit, OnDestroy {
           );
           if (stackedButtons.length > 0) {
             stackedButtons.forEach((button: Element) => {
-              (button as HTMLElement).style.setProperty(
-                'display',
-                'none',
-                'important',
-              );
+              (button as HTMLElement).classList.add('hidden-libkey-button');
             });
             if (this.observer) {
               this.observer.disconnect();
