@@ -281,6 +281,16 @@ div.responsive-availability-layout:has(custom-hathi-trust-link) {
   }
 }
 
+/* hide libkey button if no online availability */
+button.hidden-libkey-button {
+  display: none !important;
+}
+
+/* hide container for hidden libkey button */
+stacked-dropdown:has(.hidden-libkey-button) {
+  display: none;
+}
+
 /* --- Facets styles --- */
 /* capitalize local display field facets */
 nde-filters-group#lds01 span.mdc-button__label {
