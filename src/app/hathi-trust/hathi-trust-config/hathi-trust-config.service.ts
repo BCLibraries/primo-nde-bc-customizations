@@ -22,7 +22,7 @@ export class HathiTrustConfigService {
   ) {}
 
   get disableWhenAvailableOnline(): boolean {
-    return this.moduleParameters.disableWhenAvailableOnline ?? true;
+    return this.moduleParameters.disableWhenAvailableOnline ?? false;
   }
 
   get disableForJournals(): boolean {
