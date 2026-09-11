@@ -1,4 +1,4 @@
-import { Inject, inject, Injectable } from '@angular/core';
+import { Inject, inject, Injectable } from "@angular/core";
 
 interface HathiTrustModuleParameters {
   disableWhenAvailableOnline: boolean;
@@ -8,20 +8,21 @@ interface HathiTrustModuleParameters {
     oclc: boolean;
     isbn: boolean;
     issn: boolean;
+    lccn: boolean;
   };
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class HathiTrustConfigService {
   constructor(
-    @Inject('MODULE_PARAMETERS')
-    private moduleParameters: HathiTrustModuleParameters,
+    @Inject("MODULE_PARAMETERS")
+    private moduleParameters: HathiTrustModuleParameters
   ) {}
 
   get disableWhenAvailableOnline(): boolean {
-    return this.moduleParameters.disableWhenAvailableOnline ?? false;
+    return this.moduleParameters.disableWhenAvailableOnline ?? true;
   }
 
   get disableForJournals(): boolean {
@@ -42,5 +43,9 @@ export class HathiTrustConfigService {
 
   get matchOnIssn(): boolean {
     return this.moduleParameters.matchOn?.issn ?? false;
+  }
+
+  get matchOnLccn(): boolean {
+    return this.moduleParameters.matchOn?.lccn ?? false;
   }
 }

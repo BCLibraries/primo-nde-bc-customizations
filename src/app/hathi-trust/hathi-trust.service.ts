@@ -1,5 +1,3 @@
-// This service provides methods for finding full text links in HathiTrust.
-
 import { inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import {
@@ -43,6 +41,7 @@ export class HathiTrustService {
       ids.oclc = getAddata(doc, 'oclcid').flatMap(oclcFilter);
     if (this.config.matchOnIsbn) [ids.isbn] = getAddata(doc, 'isbn');
     if (this.config.matchOnIssn) [ids.issn] = getAddata(doc, 'issn');
+    if (this.config.matchOnLccn) [ids.lccn] = getAddata(doc, 'lccn');
     if (Object.values(ids).some((arr) => arr?.length > 0)) {
       return new HathiTrustQuery(ids);
     } else {
@@ -71,14 +70,16 @@ function getAddata(doc: Doc, ...vals: string[]): string[][] {
 }
 
 function hasOnlineAvailability(doc: Doc): boolean | undefined {
+  if (!doc.delivery?.GetIt1 || doc.delivery?.GetIt1.length === 0)
+    return doc.delivery?.deliveryCategory.includes('Alma-E');
   return doc.delivery?.GetIt1.some((getit) =>
-    getit.links.some((link) => link.isLinktoOnline)
+    getit.links.some((link) => link.isLinktoOnline),
   );
 }
 
 function isJournal(doc: Doc): boolean {
   return doc.pnx.addata['format']?.some((format) =>
-    format.toLowerCase().includes('journal')
+    format.toLowerCase().includes('journal'),
   );
 }
 

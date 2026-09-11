@@ -1,15 +1,12 @@
-import { TestBed } from "@angular/core/testing";
-import { HathiTrustConfigService } from "./hathi-trust-config.service";
+import { TestBed } from '@angular/core/testing';
+import { HathiTrustConfigService } from './hathi-trust-config.service';
 
-describe("HathiTrustConfigService", () => {
-  const TOKEN = "MODULE_PARAMETERS";
+describe('HathiTrustConfigService', () => {
+  const TOKEN = 'MODULE_PARAMETERS';
 
-  it("returns defaults when provided an empty parameters object", () => {
+  it('returns defaults when provided an empty parameters object', () => {
     TestBed.configureTestingModule({
-      providers: [
-        HathiTrustConfigService,
-        { provide: TOKEN, useValue: {} },
-      ],
+      providers: [HathiTrustConfigService, { provide: TOKEN, useValue: {} }],
     });
 
     const service = TestBed.inject(HathiTrustConfigService);
@@ -19,9 +16,10 @@ describe("HathiTrustConfigService", () => {
     expect(service.matchOnOclc).toBeTrue(); // default true
     expect(service.matchOnIsbn).toBeFalse(); // default false
     expect(service.matchOnIssn).toBeFalse(); // default false
+    expect(service.matchOnLccn).toBeFalse(); // default false
   });
 
-  it("respects explicit module parameter values", () => {
+  it('respects explicit module parameter values', () => {
     TestBed.configureTestingModule({
       providers: [
         HathiTrustConfigService,
@@ -31,7 +29,7 @@ describe("HathiTrustConfigService", () => {
             disableWhenAvailableOnline: false,
             disableForJournals: true,
             ignoreCopyright: true,
-            matchOn: { oclc: false, isbn: true, issn: true },
+            matchOn: { oclc: false, isbn: true, issn: true, lccn: true },
           },
         },
       ],
@@ -44,9 +42,10 @@ describe("HathiTrustConfigService", () => {
     expect(service.matchOnOclc).toBeFalse();
     expect(service.matchOnIsbn).toBeTrue();
     expect(service.matchOnIssn).toBeTrue();
+    expect(service.matchOnLccn).toBeTrue();
   });
 
-  it("falls back to defaults for missing keys and partial matchOn", () => {
+  it('falls back to defaults for missing keys and partial matchOn', () => {
     TestBed.configureTestingModule({
       providers: [
         HathiTrustConfigService,
@@ -55,7 +54,7 @@ describe("HathiTrustConfigService", () => {
           useValue: {
             // only override one top-level and one nested key
             disableWhenAvailableOnline: false,
-            matchOn: { isbn: true }, // oclc and issn missing
+            matchOn: { isbn: true }, // lccn, oclc and issn missing
           },
         },
       ],
@@ -68,5 +67,6 @@ describe("HathiTrustConfigService", () => {
     expect(service.matchOnOclc).toBeTrue(); // default true when missing
     expect(service.matchOnIsbn).toBeTrue(); // provided true
     expect(service.matchOnIssn).toBeFalse(); // default false when missing
+    expect(service.matchOnLccn).toBeFalse(); // default false when missing
   });
 });

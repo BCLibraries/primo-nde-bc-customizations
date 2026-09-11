@@ -16,8 +16,9 @@ describe('HathiTrustService', () => {
 
     configMock = {
       matchOnIsbn: false,
-      matchOnOclc: true,
+      matchOnOclc: false,
       matchOnIssn: false,
+      matchOnLccn: false,
       disableWhenAvailableOnline: false,
       disableForJournals: false,
       ignoreCopyright: false,
@@ -78,6 +79,26 @@ describe('HathiTrustService', () => {
     });
   });
 
+  it('passes LCCNs to HT API when matchOnLccn is true', (done) => {
+    (configMock as any).matchOnLccn = true;
+    const returnedUrl = 'https://catalog.hathitrust.org/Record/123456789';
+    apiMock.findFullTextUrl.and.returnValue(of(returnedUrl));
+
+    const doc = {
+      context: 'L',
+      pnx: { addata: { lccn: ['01017798'] } },
+      delivery: { GetIt1: [] },
+    } as any;
+
+    service.findFullTextFor(doc).subscribe((v) => {
+      expect(v).toBe(returnedUrl);
+      expect(apiMock.findFullTextUrl).toHaveBeenCalledWith(
+        new HathiTrustQuery({ lccn: ['01017798'] }),
+      );
+      done();
+    });
+  });
+
   it('returns undefined when disableWhenAvailableOnline is true and doc has online availability', (done) => {
     (configMock as any).disableWhenAvailableOnline = true;
     (configMock as any).matchOnOclc = true;
@@ -85,6 +106,24 @@ describe('HathiTrustService', () => {
       context: 'L',
       pnx: { addata: { oclcid: ['(OCoLC)12345'] } },
       delivery: { GetIt1: [{ links: [{ isLinktoOnline: true }] }] },
+    } as any;
+
+    apiMock.findFullTextUrl.and.returnValue(of('should-not-be-called'));
+
+    service.findFullTextFor(doc).subscribe((v) => {
+      expect(v).toBeUndefined();
+      expect(apiMock.findFullTextUrl).not.toHaveBeenCalled();
+      done();
+    });
+  });
+
+  it('returns undefined when disableWhenAvailableOnline is true and doc deliveryCategory is Alma-E', (done) => {
+    (configMock as any).disableWhenAvailableOnline = true;
+    (configMock as any).matchOnOclc = true;
+    const doc = {
+      context: 'L',
+      pnx: { addata: { oclcid: ['(OCoLC)12345'] } },
+      delivery: { GetIt1: [], deliveryCategory: ['Alma-E'] },
     } as any;
 
     apiMock.findFullTextUrl.and.returnValue(of('should-not-be-called'));
