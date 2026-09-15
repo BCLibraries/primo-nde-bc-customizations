@@ -17,15 +17,19 @@ export interface IllArticleData {
   template: `
     <div>
       <div>
-        <p>
-          Title: <a [href]="item.url" target="_blank">{{ item.title }}</a>
-        </p>
-        <p>Author: {{ item.author }}</p>
-        <p>Expires: {{ item.expires }}.</p>
+        <p>Title: <a [href]="cleanUrl" target="_blank">{{ item.title }}</a>
+        <br />
+        Author: {{ item.author }}
+        <br />
+        Expires: {{ item.expires }}.</p>
       </div>
     </div>
   `
 })
 export class IllArticleComponent {
   @Input() item!: IllArticleData;
+
+  get cleanUrl(): string {
+    return this.item?.url ? this.item.url.replace('/rrr', '') : '';
+  }
 }
