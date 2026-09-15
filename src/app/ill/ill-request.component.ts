@@ -15,8 +15,9 @@ export interface IllRequestData {
   template: `
     <div>
       <div>
-        <p>Title: {{ item.title }}</p>
-        <p>Author: {{ item.author }}</p>
+        <p>Title: {{ item.title }}
+        <br />
+        Author: {{ item.author }}</p>
       </div>
     </div>
   `

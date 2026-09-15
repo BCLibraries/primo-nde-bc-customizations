@@ -17,11 +17,11 @@ export interface IllArticleData {
   template: `
     <div>
       <div>
-        <p>
-          Title: <a [href]="item.url" target="_blank">{{ item.title }}</a>
-        </p>
-        <p>Author: {{ item.author }}</p>
-        <p>Expires: {{ item.expires }}.</p>
+        <p>Title: <a [href]="item.url" target="_blank">{{ item.title }}</a>
+        <br />
+        Author: {{ item.author }}
+        <br />
+        Expires: {{ item.expires }}.</p>
       </div>
     </div>
   `
