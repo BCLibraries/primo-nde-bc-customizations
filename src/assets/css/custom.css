@@ -334,6 +334,11 @@ nde-location-item
   }
 }
 
+/* add whitespace around no items note */
+div.getit-no-items {
+  margin: 1rem;
+}
+
 /* hide search within journal component -- otherwise displays for all journals with ISSNs, even if we don't have CDI activated for that journal */
 nde-search-within-journal {
   display: none;
