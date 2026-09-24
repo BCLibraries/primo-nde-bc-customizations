@@ -35,6 +35,16 @@ main.sub-container {
   overflow-y: scroll !important;
 }
 
+/* move mobile filters button higher in viewport */
+.all-filters-btn {
+  top: 30% !important;
+}
+
+/* hide the Sign-In prompt snackbar */
+.mat-mdc-snack-bar-container:has(nde-login) {
+  display: none;
+}
+
 /* --- Colors --- */
 
 :root {
