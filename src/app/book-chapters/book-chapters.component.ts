@@ -8,10 +8,13 @@ import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './book-chapters.component.html',
-  styleUrl: './book-chapters.component.scss'
+  styleUrl: './book-chapters.component.scss',
 })
 export class BookChaptersComponent implements AfterViewInit, OnDestroy {
-  private readonly fallbackStyleId = 'book-chapters-no-viewit-styles';
+  private readonly elementsToRestore = new Map<
+    HTMLElement,
+    { display: string; priority: string }
+  >();
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
@@ -20,19 +23,27 @@ export class BookChaptersComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const style = this.document.createElement('style');
-    style.id = this.fallbackStyleId;
-    style.textContent = `
-      .otherChaptersOfThisBook,
-      a[data-qa="book-chapters-indication"],
-      .book-chapters-or-reviews-divider {
-        display: none !important;
-      }
-    `;
-    this.document.head.appendChild(style);
+    this.document
+      .querySelectorAll<HTMLElement>(
+        '.otherChaptersOfThisBook, a[data-qa="book-chapters-indication"], .book-chapters-or-reviews-divider',
+      )
+      .forEach((element) => {
+        this.elementsToRestore.set(element, {
+          display: element.style.getPropertyValue('display'),
+          priority: element.style.getPropertyPriority('display'),
+        });
+        element.style.setProperty('display', 'none', 'important');
+      });
   }
 
   ngOnDestroy(): void {
-    this.document.getElementById(this.fallbackStyleId)?.remove();
+    this.elementsToRestore.forEach(({ display, priority }, element) => {
+      if (display) {
+        element.style.setProperty('display', display, priority);
+      } else {
+        element.style.removeProperty('display');
+      }
+    });
+    this.elementsToRestore.clear();
   }
 }
