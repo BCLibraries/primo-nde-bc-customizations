@@ -1,7 +1,7 @@
 // This component hides the "Other Chapters of This Book" section when the "View It" service is not available.
 
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'custom-book-chapters',
@@ -10,40 +10,48 @@ import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
   templateUrl: './book-chapters.component.html',
   styleUrl: './book-chapters.component.scss',
 })
-export class BookChaptersComponent implements AfterViewInit, OnDestroy {
-  private readonly elementsToRestore = new Map<
-    HTMLElement,
-    { display: string; priority: string }
-  >();
+export class BookChaptersComponent implements OnInit, OnDestroy {
+  private hidingStyle?: HTMLStyleElement;
+  private viewItObserver?: MutationObserver;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     if (this.document.querySelector('div.service_viewit')) {
       return;
     }
 
-    this.document
-      .querySelectorAll<HTMLElement>(
-        '.otherChaptersOfThisBook, a[data-qa="book-chapters-indication"], .book-chapters-or-reviews-divider',
-      )
-      .forEach((element) => {
-        this.elementsToRestore.set(element, {
-          display: element.style.getPropertyValue('display'),
-          priority: element.style.getPropertyPriority('display'),
-        });
-        element.style.setProperty('display', 'none', 'important');
+    this.hidingStyle = this.document.createElement('style');
+    this.hidingStyle.dataset['bookChaptersVisibility'] = '';
+    this.hidingStyle.textContent =
+      '.otherChaptersOfThisBook, a[data-qa="book-chapters-indication"], .book-chapters-or-reviews-divider { display: none !important; }';
+    (this.document.head ?? this.document.documentElement).appendChild(
+      this.hidingStyle,
+    );
+
+    const MutationObserverConstructor =
+      this.document.defaultView?.MutationObserver;
+    if (MutationObserverConstructor) {
+      this.viewItObserver = new MutationObserverConstructor(() => {
+        if (this.document.querySelector('div.service_viewit')) {
+          this.removeHidingStyle();
+        }
       });
+      this.viewItObserver.observe(this.document.documentElement, {
+        childList: true,
+        subtree: true,
+      });
+    }
   }
 
   ngOnDestroy(): void {
-    this.elementsToRestore.forEach(({ display, priority }, element) => {
-      if (display) {
-        element.style.setProperty('display', display, priority);
-      } else {
-        element.style.removeProperty('display');
-      }
-    });
-    this.elementsToRestore.clear();
+    this.removeHidingStyle();
+  }
+
+  private removeHidingStyle(): void {
+    this.viewItObserver?.disconnect();
+    this.viewItObserver = undefined;
+    this.hidingStyle?.remove();
+    this.hidingStyle = undefined;
   }
 }
