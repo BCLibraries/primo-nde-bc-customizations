@@ -15,6 +15,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { LibrarySearchComponent } from '../library-search/library-search.component';
 import { LibMapsIntegrationComponent } from '../lib-maps-integration/lib-maps-integration.component';
 import { LibkeyAvailabilityComponent } from '../libkey-availability/libkey-availability.component';
+import { BookChaptersComponent } from '../book-chapters/book-chapters.component';
 
 // Define the map
 export const selectorComponentMap = new Map<string, any>([
@@ -36,4 +37,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-search-bar-presenter-after', LibrarySearchComponent],
   ['nde-full-display-service-container-top', LibMapsIntegrationComponent],
   ['nde-record-availability-top', LibkeyAvailabilityComponent],
+  ['nde-record-book-chapters-or-reviews-before', BookChaptersComponent],
 ]);

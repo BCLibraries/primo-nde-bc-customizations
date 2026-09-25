@@ -1,88 +1,38 @@
+// This component hides the "Other Chapters of This Book" section when the "View It" service is not available.
+
 import { DOCUMENT } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  Inject,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  ViewEncapsulation,
-} from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'custom-book-chapters',
   standalone: true,
   imports: [],
   templateUrl: './book-chapters.component.html',
-  styleUrl: './book-chapters.component.scss',
-  encapsulation: ViewEncapsulation.None,
+  styleUrl: './book-chapters.component.scss'
 })
-export class BookChaptersComponent implements OnInit, OnDestroy {
-  private observer?: MutationObserver;
-  private readonly FALLBACK_CLASS = 'no-service-viewit';
+export class BookChaptersComponent implements AfterViewInit, OnDestroy {
+  private readonly fallbackStyleId = 'book-chapters-no-viewit-styles';
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
-    private el: ElementRef,
-  ) {}
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  ngOnInit(): void {
-    this.checkServiceViewIt();
-    this.setupObserver();
+  ngAfterViewInit(): void {
+    if (this.document.querySelector('div.service_viewit')) {
+      return;
+    }
+
+    const style = this.document.createElement('style');
+    style.id = this.fallbackStyleId;
+    style.textContent = `
+      .otherChaptersOfThisBook,
+      a[data-qa="book-chapters-indication"],
+      .book-chapters-or-reviews-divider {
+        display: none !important;
+      }
+    `;
+    this.document.head.appendChild(style);
   }
 
   ngOnDestroy(): void {
-    this.disconnectObserver();
-    this.removeFallbackClass();
-  }
-
-  private checkServiceViewIt(): void {
-    try {
-      const hasViewIt = !!this.document.querySelector('div.service_viewit');
-      if (!hasViewIt) {
-        this.renderer.addClass(this.document.body, this.FALLBACK_CLASS);
-      } else {
-        this.removeFallbackClass();
-      }
-    } catch (e) {
-      console.error(
-        'BookChaptersComponent: Error checking div.service_viewit selector',
-        e,
-      );
-    }
-  }
-
-  private setupObserver(): void {
-    if (typeof MutationObserver === 'undefined') return;
-
-    try {
-      this.observer = new MutationObserver(() => {
-        this.checkServiceViewIt();
-      });
-
-      this.observer.observe(this.document.body, {
-        childList: true,
-        subtree: true,
-      });
-    } catch (e) {
-      console.error(
-        'BookChaptersComponent: Error initializing MutationObserver',
-        e,
-      );
-    }
-  }
-
-  private disconnectObserver(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-      this.observer = undefined;
-    }
-  }
-
-  private removeFallbackClass(): void {
-    if (this.document?.body?.classList.contains(this.FALLBACK_CLASS)) {
-      this.renderer.removeClass(this.document.body, this.FALLBACK_CLASS);
-    }
+    this.document.getElementById(this.fallbackStyleId)?.remove();
   }
 }
