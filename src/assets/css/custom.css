@@ -319,6 +319,11 @@ button.quick-filter-btn span.mdc-button__label::after {
 
 /* --- Full Record display styles --- */
 
+/* force space after related titles labels */
+nde-highlight + a.hyper-text {
+margin-left: 4px !important;
+}
+
 /* hide item-level request note by default -- changes by customization if item-level request is available */
 div#item-level-request-msg {
   display: none;
