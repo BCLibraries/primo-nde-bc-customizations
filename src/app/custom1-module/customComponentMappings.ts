@@ -37,5 +37,5 @@ export const selectorComponentMap = new Map<string, any>([
   ['nde-search-bar-presenter-after', LibrarySearchComponent],
   ['nde-full-display-service-container-top', LibMapsIntegrationComponent],
   ['nde-record-availability-top', LibkeyAvailabilityComponent],
-  ['nde-record-book-chapters-or-reviews-before', BookChaptersComponent],
+  ['nde-book-chapters-or-reviews-item-after', BookChaptersComponent],
 ]);
