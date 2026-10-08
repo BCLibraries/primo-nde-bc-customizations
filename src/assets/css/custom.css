@@ -527,12 +527,3 @@ nde-report-a-problem > button > mat-icon {
 nde-report-a-problem button mat-icon {
   display: none !important;
 }
-
-/* */
-nde-book-chapters-or-reviews-item .book-chapter-nolink {
-  font-weight: 500;
-  
-  mat-icon {
-    display: none !important;
-  }
-}
