@@ -16,7 +16,7 @@ import { Component, Inject, ElementRef, OnDestroy, OnInit, ViewEncapsulation } f
   template: '',
   styles: [`
   /* we love a lookahead */
-    body:has(div.service_viewit) { 
+    body:not(:has(div.service_viewit)) { 
       [id*="otherChaptersOfThisBook"], [id*="chaptersOfThisBook"] {
         nde-book-chapters-or-reviews-item a.link {
           pointer-events: none;
