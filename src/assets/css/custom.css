@@ -317,18 +317,6 @@ button.quick-filter-btn span.mdc-button__label::after {
   margin-left: 8px;
 }
 
-/* WORKAROUND: This resolves the Webkit issue where the exclude button is overruled by the surrounding touch target of the facet label, causing the facet to be selected when clicking on exclude. */
-/* Force clicks on the SVG icon to register directly on the <button> element in WebKit */
-nde-filters-value label.mdc-label button.exclude-btn > * {
-  pointer-events: none !important;
-}
-
-/* Ensure the button itself still captures all pointer events and hover tooltips */
-nde-filters-value label.mdc-label button.exclude-btn {
-  pointer-events: auto !important;
-}
-/* END WORKAROUND */
-
 /* --- Full Record display styles --- */
 
 /* force space after related titles labels */
