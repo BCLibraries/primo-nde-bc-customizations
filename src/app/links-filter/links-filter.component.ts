@@ -73,8 +73,13 @@ export class LinksFilterComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    linkContainers.forEach((linkContainer: any) => {
-      const children = Array.from(linkContainer.children) as HTMLElement[];
+    linkContainers.forEach((linkContainer: Element) => {
+      const children = Array.from(linkContainer.children).flatMap((child) =>
+        child.tagName.toLowerCase() === 'ul' ||
+        child.tagName.toLowerCase() === 'ol'
+          ? Array.from(child.children)
+          : [child],
+      ) as HTMLElement[];
 
       children.forEach((child) => {
         if (child.classList.contains('nde-hidden-link')) {
